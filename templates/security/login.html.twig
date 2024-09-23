@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jr_print  |  Se connecter{% endblock %}
+{% block body %}
+<head>
+   <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+</head>
+
+<div class="connect">
+<div class="containerlogin">
+<div class="form-containerlogin sign-in">
+    <form method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <div class="social-icons">
+            <img src="logo.PNG" alt="logo jr_print" width="100px" height="50px">
+        </div>
+        <h1 class="h3 mb-4 font-weight-normal mt-4">Veuillez vous connectez</h1>
+        <label for="inputEmail">Veuillez saisir votre Email</label>
+        <input type="email" placeholder= "Email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-4 mt-2" autocomplete="email" required autofocus>
+        <label for="inputPassword">Veuillez saisir votre Mot de passe </label>
+        <input type="password" placeholder= "Mot de passe" name="password" id="inputPassword" class="form-control mt-2" autocomplete="current-password" required>
+
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+        
+        <button class="btn btn-lg btn-info mt-4 mb-4" type="submit">
+            Se Connecter
+        </button>
+        
+        <a href="{{path('app_forgot_password_request')}}">Forget Your Password?</a>
+    </form>
+</div>
+<div class="toggle-containerlogin">
+      <div class="toggle">
+        <div class="toggle-panel toggle-right">
+            <h3>Bienvenue sur la page de connexion</h3>
+            <p>Si vous ne possédez pas encore de compte,<br> Nous vous invitons à en créer un en cliquant sur le bouton ci-dessous.</p>
+            <button class="hidden " id="register"><a href="{{path('app_register')}}">S'inscrire</a></button>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

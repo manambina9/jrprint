@@ -1,0 +1,278 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Jr_print{% endblock %}
+
+{% block body %}
+<!-- Slider en haut de la page -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ asset('images/bmoi.PNG') }}" class="d-block w-100" alt="Réalisation 1">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Notre Première Réalisation</h5>
+                <p>Description de la première réalisation.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('images/car.PNG') }}" class="d-block w-100" alt="Réalisation 2">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Notre Deuxième Réalisation</h5>
+                <p>Description de la deuxième réalisation.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('images/m_trade.PNG') }}" class="d-block w-100" alt="Réalisation 3">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Notre Troisième Réalisation</h5>
+                <p>Description de la troisième réalisation.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('images/jovena.PNG') }}" class="d-block w-100" alt="Réalisation 4">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Notre Quatrième Réalisation</h5>
+                <p>Description de la quatrième réalisation.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Précédent</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Suivant</span>
+    </button>
+</div>
+
+<section class="section-custom py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Citation à gauche -->
+            <div class="col-md-5 text-center">
+                <div class="quote-box">
+                    <p class="author"><img src="images/logo1.png" alt="Jr_print" width="190px" height="90px"></p>
+                </div>
+            </div>
+            <!-- Texte à droite -->
+            <div class="col-md-7">
+                <h3 class="section-title">Qui somme nous ?</h3>
+                <p class="section-description mt-6">
+                    <p class="p mt-2 mb-5"> .</p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, impedit ut, dignissimos porro omnis vero voluptas ad et rem, deleniti doloribus veritatis placeat possimus distinctio iste fugit? Amet, neque corrupti!    
+                    </p>
+                <p class="section-description">
+                    Une entreprise d'impression numérique sur grand format; spécialisée dans la gestion et l'affichage des campagnes publicitaires permetant de se connecter au public dans tout Madagascar .
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- section client -->
+
+<section id="clients" class="clients" style="background-color: white;">
+  <style>
+    #clients {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+    }
+
+    .clients-slider {
+      padding: 20px 0;
+    }
+
+    .clients-slider img {
+      width: auto;
+      max-width: 100px; /* Ajuste selon la taille que tu veux pour les logos */
+      height: auto;
+    }
+  </style>
+
+  <div class="container mt-5" data-aos="zoom-out"></div>
+    <h2 style="text-align: center; padding-bottom: 60px;">Nos réferences</h2>
+
+    <div class="clients-slider swiper">
+      <div class="swiper-wrapper align-items-center">
+        <div class="swiper-slide"><img src="sponsor/20-UMATEC.png" class="img-fluid" alt="UMATEC"></div>
+        <div class="swiper-slide"><img src="sponsor/axian.png" class="img-fluid" alt="Axian"></div>
+        <div class="swiper-slide"><img src="sponsor/canal+.png" class="img-fluid" alt="Canal+"></div>
+        <div class="swiper-slide"><img src="sponsor/UNICEF-Emblem.png" class="img-fluid" alt="UNICEF"></div>
+        <div class="swiper-slide"><img src="sponsor/jovena.png" class="img-fluid" alt="Jovena"></div>
+        <div class="swiper-slide"><img src="sponsor/orange.png" class="img-fluid" alt="Orange"></div>
+        <div class="swiper-slide"><img src="sponsor/shell-3-logo-png-transparent.png" class="img-fluid" alt="Shell"></div>
+        <div class="swiper-slide"><img src="sponsor/22-JBt.png" class="img-fluid" alt="JBt"></div>
+        <div class="swiper-slide"><img src="sponsor/R.png" class="img-fluid" alt="R"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="clients" class="clients" style="background-color: white;">
+  <style>
+    #clients {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+    }
+
+    .clients-slider {
+      padding: 20px 0;
+    }
+
+    .clients-slider img {
+      width: auto;
+      max-width: 100px; /* Ajuste selon la taille que tu veux pour les logos */
+      height: auto;
+    }
+  </style>
+
+  <div class="container" data-aos="zoom-out"></div>
+    <div class="clients-slider swiper">
+      <div class="swiper-wrapper align-items-center">
+        <div class="swiper-slide"><img src="sponsor/3-ct motors.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="sponsor/2-Dolto.webp" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="sponsor/1-madecasse.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="sponsor/4-europ'alu.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="sponsor/6-Logo+GDS.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="sponsor/15-LOGO_TECHNOALARME_HD.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="sponsor/BATPRO.png" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="sponsor/8-HYDIS.jpg" class="img-fluid" alt=""></div>
+        <div class="swiper-slide"><img src="sponsor/19-ucomad.png" class="img-fluid" alt=""></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- section statistique-->
+<section id="stats-counter" class="stats-counter" style="background-color: white;"></section>
+  <div class="container" style="background-color: white;">
+    <div class="row gy-4 align-items-center">
+      <div class="col-lg-6">
+        <img src="assets/img/stats-img.svg" alt="" class="img-fluid">
+      </div>
+      <div class="col-lg-6">
+        <div class="stats-item d-flex align-items-center">
+          <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
+          <p style="font-size: 25px;"><strong>Clients satisfaits</strong> Lorem ipsum dolor sit amet.</p>
+        </div>
+        <div class="stats-item d-flex align-items-center">
+          <span data-purecounter-start="0" data-purecounter-end="400" data-purecounter-duration="1" class="purecounter"></span>
+          <p style="font-size: 25px;"><strong>Panneau à louer à Madagascar</strong> Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- services -->
+<section id="hero" class="hero" style="background: transparent;" style="background-color: white;">
+    <div class="icon-boxes position-relative" style="background-color: white;">
+        <div class="container position-relative" style="background-color: white;">
+          <div class="row gy-4 mt-5">
+      
+            <div class="col-xl-3 col-md-6" data-aos-delay="100">
+              <div class="card px-2">
+                <div class="side side--front">
+                  <h4 class="title text-align-start"><img src="images/car.PNG" height="200px" width="310px" alt=""></h4>
+                </div>
+                <div class="side side--back">
+                  <i class="text-white fs-2" style="text-decoration: solid; align-items: center; text-align: center;">Habillage des Voitures</i> 
+                  <a href="" class="btn-discover">Découvrir</a>
+                </div>
+              </div>
+            </div><!--End Icon Box -->
+      
+            <div class="col-xl-3 col-md-6" data-aos-delay="200">
+              <div class="card ">
+                <div class="side side--front">
+                  <h4 class="title text-align-start"><img src="images/bmoi.PNG" height="210px" width="310px" alt=""></h4>
+                </div>
+                <div class="side side--back">
+                  <div class="content">
+                    <i class="text-white fs-2" style="text-decoration: solid; align-items: center; text-align: center;">Habillages comptoirs</i>
+                    <a href="" class="btn-discover">Découvrir</a>
+                  </div>
+                </div>
+              </div>
+            </div><!--End Icon Box -->
+      
+            <div class="col-xl-3 col-md-6" data-aos-delay="300" style="background-color: white;">
+              <div class="card">
+                <div class="side side--front">
+                  <h4 class="title text-align-start"><img src="images/m_trade.PNG" height="200px" width="310px" alt=""></h4>
+                </div>
+                <div class="side side--back">
+                  <i class="text-white fs-2" style="text-decoration: solid; align-items: center; text-align: center;">Habillages vitrines</i>
+                  <a href="" class="btn-discover">Découvrir</a>
+                </div>
+              </div>
+            </div><!--End Icon Box -->
+      
+            <div class="col-xl-3 col-md-6" data-aos-delay="500"; style="background-color: white;">
+              <div class="card">
+                <div class="side side--front">
+                  <h4 class="title text-align-start"><img src="images/jovena.PNG" height="200px" width="310px" alt=""></h4>
+                </div>
+                <div class="side side--back">
+                  <i class="text-white fs-2" style="text-decoration: solid; align-items: center; text-align: center;">Habillages cuves & Transtack</i>
+                  <a href="" class="btn-discover">Découvrir</a>
+                </div>
+              </div>
+            </div><!--End Icon Box -->
+          </div>
+        </div>
+      </div>
+</section>
+
+<!-- Section Témoignages -->
+<section class="section">
+    <div class="container">
+        <h2 class="text-center">Ce que disent nos clients</h2>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="testimonial">
+                    <p>"Service exceptionnel et résultats impressionnants. Je recommande vivement !" - Client A</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial">
+                    <p>"Professionnels et réactifs. Mon entreprise a gagné en visibilité grâce à eux." - Client B</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial">
+                    <p>"Une équipe compétente et créative. Les panneaux publicitaires ont dépassé mes attentes." - Client C</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const carouselElement = document.getElementById('carouselExampleIndicators');
+    const carousel = new bootstrap.Carousel(carouselElement);
+
+    carouselElement.addEventListener('slide.bs.carousel', function (event) {
+        if (event.to === 3) { // Si on va vers la 4ème diapositive
+            setTimeout(() => {
+                carousel.to(0); // Redémarre le carousel à la première diapositive
+            }, 1000); // Ajoute un délai pour permettre la transition
+        }
+    });
+
+</script>
+
+{% endblock %}

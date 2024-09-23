@@ -1,0 +1,444 @@
+/* Global settings */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+#main {
+    padding: 60px 0;
+}
+
+.sections-bg {
+    background-color: #ffffff;
+    padding: 60px 0;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}
+
+/* Portfolio section */
+.portfolio-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.portfolio-item {
+    margin-bottom: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+.portfolio-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-wrap img {
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.portfolio-wrap:hover img {
+    transform: scale(1.1);
+}
+
+.portfolio-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.portfolio-info h4 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.portfolio-info p {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Portfolio filters */
+.portfolio-flters {
+    padding: 0;
+    margin: 0 auto 40px auto;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.portfolio-flters li {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.portfolio-flters li:hover,
+.portfolio-flters .filter-active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 28px;
+    }
+
+    .portfolio-flters li {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+
+    .portfolio-info h4 {
+        font-size: 16px;
+    }
+
+    .portfolio-info p {
+        font-size: 12px;
+    }
+}
+
+/* Portfolio section */
+.portfolio-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Ajuster la taille des éléments */
+.portfolio-item {
+    width: calc(33.33% - 20px); /* 3 éléments par ligne */
+    transition: all 0.3s ease-in-out;
+    position: relative; /* Nécessaire pour le positionnement absolu de .portfolio-wrap */
+}
+
+.portfolio-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+    border: 1px solid #e1e1e1;
+    transition: transform 0.3s ease; /* Animation lors du survol */
+}
+
+.portfolio-wrap img {
+    display: block;
+    width: 100%;
+    height: auto; /* Garder les proportions d'origine */
+    max-height: 300px; /* Limiter la hauteur maximale pour une meilleure présentation */
+    object-fit: cover; /* Couvrir l'élément sans déformation */
+}
+
+.portfolio-wrap:hover {
+    transform: scale(1.05); /* Zoom léger au survol */
+}
+
+.portfolio-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.portfolio-info:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Assombrir l'arrière-plan au survol */
+}
+
+/* Portfolio filters */
+.portfolio-flters {
+    padding: 0;
+    margin: 0 auto 40px auto;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.portfolio-flters li {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.portfolio-flters li:hover,
+.portfolio-flters .filter-active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .portfolio-item {
+        width: calc(50% - 20px); /* 2 éléments par ligne sur mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-item {
+        width: 100%; /* 1 élément par ligne sur très petit écran */
+    }
+}
+
+/* Global settings */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+#main {
+    padding: 60px 0;
+}
+
+.sections-bg {
+    background-color: #ffffff;
+    padding: 60px 0;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}
+
+/* Portfolio section */
+.portfolio-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.portfolio-item {
+    margin-bottom: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+.portfolio-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-wrap img {
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.portfolio-wrap:hover img {
+    transform: scale(1.1);
+}
+
+.portfolio-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.portfolio-info h4 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.portfolio-info p {
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Portfolio filters */
+.portfolio-flters {
+    padding: 0;
+    margin: 0 auto 40px auto;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.portfolio-flters li {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.portfolio-flters li:hover,
+.portfolio-flters .filter-active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 28px;
+    }
+
+    .portfolio-flters li {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+
+    .portfolio-info h4 {
+        font-size: 16px;
+    }
+
+    .portfolio-info p {
+        font-size: 12px;
+    }
+}
+
+/* Portfolio section */
+.portfolio-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Ajuster la taille des éléments */
+.portfolio-item {
+    width: calc(33.33% - 20px); /* 3 éléments par ligne */
+    transition: all 0.3s ease-in-out;
+    position: relative; /* Nécessaire pour le positionnement absolu de .portfolio-wrap */
+}
+
+.portfolio-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+    border: 1px solid #e1e1e1;
+    transition: transform 0.3s ease; /* Animation lors du survol */
+}
+
+.portfolio-wrap img {
+    display: block;
+    width: 100%;
+    height: auto; /* Garder les proportions d'origine */
+    max-height: 300px; /* Limiter la hauteur maximale pour une meilleure présentation */
+    object-fit: cover; /* Couvrir l'élément sans déformation */
+}
+
+.portfolio-wrap:hover {
+    transform: scale(1.05); /* Zoom léger au survol */
+}
+
+.portfolio-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.portfolio-info:hover {
+    background-color: rgba(0, 0, 0, 0.9); /* Assombrir l'arrière-plan au survol */
+}
+
+/* Portfolio filters */
+.portfolio-flters {
+    padding: 0;
+    margin: 0 auto 40px auto;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.portfolio-flters li {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.portfolio-flters li:hover,
+.portfolio-flters .filter-active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .portfolio-item {
+        width: calc(50% - 20px); /* 2 éléments par ligne sur mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-item {
+        width: 100%; /* 1 élément par ligne sur très petit écran */
+    }
+}
+
