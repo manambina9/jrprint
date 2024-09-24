@@ -4,6 +4,9 @@
 {% block title %}Contactez-nous{% endblock %}
 
 {% block body %}
+<head></head>
+    <link href="{{ asset('css/contact.css') }}" rel="stylesheet">
+ </head>
 
 </main><!-- End #main -->
 <!-- ======= Contact Section ======= -->
@@ -19,9 +22,9 @@
 
     <div class="col-lg-4">
 
-        <div class="info-container d-flex flex-column align-items-center justify-content-center">
+        <div class="info-container d-flex flex-column justify-content-center">
         <div class="info-item d-flex">
-            <i class="bi bi-geo-alt flex-shrink-0"></i>
+            <i class="bi bi-geo-alt-fill"></i>
             <div>
             <h4>Siège:</h4>
             <p>Lot IVL 3 D Ambodirovonkely Andraharo</p>
@@ -29,7 +32,7 @@
         </div><!-- End Info Item -->
 
         <div class="info-item d-flex">
-            <i class="bi bi-envelope flex-shrink-0"></i>
+            <i class="bi bi-envelope-fill"></i>
             <div>
             <h4>Email:</h4>
             <p>jr_print@yahoo.fr</p>
@@ -37,7 +40,7 @@
         </div><!-- End Info Item -->
 
         <div class="info-item d-flex">
-            <i class="bi bi-phone flex-shrink-0"></i>
+            <i class="bi bi-telephone-fill"></i>
             <div>
             <h4>Téléphone:</h4>
             <p>+261 32 07 737 70</p>
@@ -46,7 +49,7 @@
         </div><!-- End Info Item -->
 
         <div class="info-item d-flex">
-            <i class="bi bi-clock flex-shrink-0"></i>
+            <i class="bi bi-stopwatch-fill"></i>
             <div>
             <h4>Heure d'ouverture:</h4>
             <p>Lundi-Vendredi : 8h - 16h</p>
@@ -54,18 +57,17 @@
         </div><!-- End Info Item -->
 
         <div class="info-item d-flex">
-        <i class='bx bxl-facebook'></i>
+        <i class="bi bi-facebook"></i>
             <div>
-            <h4>Facebook:</h4>
-            <p><a class=" text-white" href="https://www.facebook.com/">https://www.facebook.com/</a></p>
+            <p><a style="color: #e04d1a;" href="https://www.facebook.com/"><h4>Facebook:</h4></a></p>
             </div>
         </div><!-- End Info Item -->
 
         <div class="info-item d-flex">
-        <i class='bx bxl-linkedin'></i>
+            <i class="bi bi-linkedin"></i>
             <div>
-            <h4>Linkdin:</h4>
-            <p> <a class=" text-white" href="https://www.linkedin.com">https://www.linkedin.com/</a></p>
+            
+            <p> <a style="color: #e04d1a;"  href="https://www.linkedin.com"><h4>Linkdin:</h4></a></p>
             </div>
         </div><!-- End Info Item -->
         </div>
@@ -104,4 +106,46 @@
 
 </main><!-- End #main -->
 
+<script>
+    // Validation du formulaire
+document.querySelector('.php-email-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var subject = document.getElementById('subject').value.trim();
+    var message = document.getElementById('message').value.trim();
+    var errorMessage = document.querySelector('.error-message');
+    var sentMessage = document.querySelector('.sent-message');
+
+    // Vérification des champs
+    if (name === '' || email === '' || subject === '' || message === '') {
+        errorMessage.innerHTML = 'Veuillez remplir tous les champs.';
+        errorMessage.style.display = 'block';
+        sentMessage.style.display = 'none';
+    } else if (!validateEmail(email)) {
+        errorMessage.innerHTML = 'Veuillez entrer une adresse email valide.';
+        errorMessage.style.display = 'block';
+        sentMessage.style.display = 'none';
+    } else {
+        errorMessage.style.display = 'none';
+        sentMessage.style.display = 'block';
+    }
+});
+
+// Fonction de validation d'email
+function validateEmail(email) {
+    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Effet de clic du bouton
+var submitButton = document.querySelector('.php-email-form button[type="submit"]');
+submitButton.addEventListener('click', function() {
+    submitButton.innerHTML = 'Envoi...';
+    setTimeout(function() {
+        submitButton.innerHTML = 'Envoyer un Message';
+    }, 2000);
+});
+
+</script>
 {% endblock %}

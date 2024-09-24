@@ -1,0 +1,216 @@
+/* Style général */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9fafc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Section principale */
+main#advantages {
+    padding: 60px 0;
+}
+
+h1, h2 {
+    color: #2c2c2c;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* Images */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.img-fluid.rounded-circle {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* Première section */
+section.container:first-of-type {
+    margin-bottom: 60px;
+}
+
+/* Notre équipe */
+section.container:nth-of-type(2) {
+    margin-bottom: 60px;
+}
+
+section.container:nth-of-type(2) .row .col-md-4 {
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+section.container:nth-of-type(2) .row .col-md-4:hover {
+    transform: translateY(-10px);
+}
+
+section.container:nth-of-type(2) h3 {
+    margin-top: 15px;
+}
+
+section.container:nth-of-type(2) p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Nos avantages */
+.bi-check-circle {
+    font-size: 36px;
+    color: #ff5821;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.bi-check-circle:hover {
+    transform: scale(1.2);
+    color: #e04d1a;
+}
+
+.col-md-4 {
+    text-align: center;
+    padding: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.col-md-4:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.col-md-4 p {
+    font-size: 15px;
+    color: #555;
+}
+
+/* Témoignages clients */
+blockquote.blockquote {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+blockquote.blockquote::before {
+    content: '“';
+    font-size: 50px;
+    color: #ff5821;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+}
+
+blockquote.blockquote p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+blockquote.blockquote footer {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Section des engagements */
+section.container:last-of-type {
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f0f0f5;
+    margin-top: 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+section.container:last-of-type p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Bouton */
+a.btn-primary {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #ff5821;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+a.btn-primary:hover {
+    background-color: #e04d1a;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    .col-md-4 {
+        margin-bottom: 20px;
+    }
+
+    ul {
+        padding-left: 15px;
+    }
+
+    .img-fluid.rounded-circle {
+        width: 120px;
+        height: 120px;
+    }
+}
