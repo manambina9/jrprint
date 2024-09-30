@@ -19,6 +19,8 @@ class Order
     #[Assert\NotBlank]
     private ?User $client = null;
 
+    #[ORM\Column(type: 'boolean')]
+    #[ORM\JoinColumn(nullable: false)]
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank]
     private ?string $details = null;
