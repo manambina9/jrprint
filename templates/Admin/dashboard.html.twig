@@ -1,0 +1,87 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre d'utilisateurs</h5>
+                        <h2>145</h2>
+                        <span class="text-success">12</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total panneau </h5>
+                        <h2>70</h2>
+                        <span class="text-success">70</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Panneau en location</h5>
+                        <h2>28</h2>
+                        <span class="text-danger">28</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Chart -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <canvas id="reportsChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Recent Activity</h5>
+                        <ul>
+                            <li>32 min ago: Lorem ipsum dolor sit amet...</li>
+                            <li>56 min ago: Volutpatem blanditiis...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js integration for the report chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('reportsChart').getContext('2d');
+        var reportsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '02:00', '04:00', '06:00', '08:00'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [10, 20, 30, 40, 50],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false,
+                }, {
+                    label: 'Revenue',
+                    data: [15, 25, 35, 45, 55],
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    fill: false,
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
