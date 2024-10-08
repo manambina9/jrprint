@@ -1,151 +1,104 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Contactez-nous{% endblock %}
 
 {% block body %}
 <head></head>
-    <link href="{{ asset('css/contact.css') }}" rel="stylesheet">
- </head>
+<link href="{{ asset('css/contact.css') }}" rel="stylesheet">
 
-</main><!-- End #main -->
-<!-- ======= Contact Section ======= -->
-<section id="contact" class="contact">
-<div class="container" >
-
+<div class="container">
     <div class="section-header">
-    <h2>Contact</h2>
-    <p>Nulla dolorum nulla nesciunt rerum facere sed ut inventore quam porro nihil id ratione ea sunt quis dolorem dolore earum</p>
+        <h2>Contact</h2>
+        <p>Nulla dolorum nulla nesciunt rerum facere sed ut inventore quam porro nihil id ratione ea sunt quis dolorem dolore earum</p>
     </div>
+
+    {# Affichage des messages flash #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
 
     <div class="row gx-lg-0 gy-4">
+        <div class="col-lg-4">
 
-    <div class="col-lg-4">
-
-        <div class="info-container d-flex flex-column justify-content-center">
-        <div class="info-item d-flex">
-            <i class="bi bi-geo-alt-fill"></i>
-            <div>
-            <h4>Siège:</h4>
-            <p>Lot IVL 3 D Ambodirovonkely Andraharo</p>
+            <div class="info-container d-flex flex-column justify-content-center">
+            <div class="info-item d-flex">
+                <i class="bi bi-geo-alt-fill"></i>
+                <div>
+                <h4>Siège:</h4>
+                <p>Lot IVL 3 D Ambodirovonkely Andraharo</p>
+                </div>
+            </div><!-- End Info Item -->
+    
+            <div class="info-item d-flex">
+                <i class="bi bi-envelope-fill"></i>
+                <div>
+                <h4>Email:</h4>
+                <p>jr_print@yahoo.fr</p>
+                </div>
+            </div><!-- End Info Item -->
+    
+            <div class="info-item d-flex">
+                <i class="bi bi-telephone-fill"></i>
+                <div>
+                <h4>Téléphone:</h4>
+                <p>+261 32 07 737 70</p>
+                <p>+261 38 08 211 11</p>
+                </div>
+            </div><!-- End Info Item -->
+    
+            <div class="info-item d-flex">
+                <i class="bi bi-stopwatch-fill"></i>
+                <div>
+                <h4>Heure d'ouverture:</h4>
+                <p>Lundi-Vendredi : 8h - 16h</p>
+                </div>
+            </div><!-- End Info Item -->
+    
+            <div class="info-item d-flex">
+            <i class="bi bi-facebook"></i>
+                <div>
+                <p><a style="color: #e04d1a;" href="https://www.facebook.com/"><h4>Facebook:</h4></a></p>
+                </div>
+            </div><!-- End Info Item -->
+    
+            <div class="info-item d-flex">
+                <i class="bi bi-linkedin"></i>
+                <div>
+                
+                <p> <a style="color: #e04d1a;"  href="https://www.linkedin.com"><h4>Linkdin:</h4></a></p>
+                </div>
+            </div><!-- End Info Item -->
             </div>
-        </div><!-- End Info Item -->
-
-        <div class="info-item d-flex">
-            <i class="bi bi-envelope-fill"></i>
-            <div>
-            <h4>Email:</h4>
-            <p>jr_print@yahoo.fr</p>
-            </div>
-        </div><!-- End Info Item -->
-
-        <div class="info-item d-flex">
-            <i class="bi bi-telephone-fill"></i>
-            <div>
-            <h4>Téléphone:</h4>
-            <p>+261 32 07 737 70</p>
-            <p>+261 38 08 211 11</p>
-            </div>
-        </div><!-- End Info Item -->
-
-        <div class="info-item d-flex">
-            <i class="bi bi-stopwatch-fill"></i>
-            <div>
-            <h4>Heure d'ouverture:</h4>
-            <p>Lundi-Vendredi : 8h - 16h</p>
-            </div>
-        </div><!-- End Info Item -->
-
-        <div class="info-item d-flex">
-        <i class="bi bi-facebook"></i>
-            <div>
-            <p><a style="color: #e04d1a;" href="https://www.facebook.com/"><h4>Facebook:</h4></a></p>
-            </div>
-        </div><!-- End Info Item -->
-
-        <div class="info-item d-flex">
-            <i class="bi bi-linkedin"></i>
-            <div>
-            
-            <p> <a style="color: #e04d1a;"  href="https://www.linkedin.com"><h4>Linkdin:</h4></a></p>
-            </div>
-        </div><!-- End Info Item -->
+    
         </div>
 
+        <div class="col-lg-8">
+            <form action="{{ path('contact') }}" method="post" role="form" class="php-email-form">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="votre nom" required>
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="votre Email" required>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="objet" required>
+                </div>
+                <div class="form-group mt-3">
+                    <textarea class="form-control" name="message" rows="7" placeholder="Message" required></textarea>
+                </div>
+                <div class="my-3">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
+                <div class="text-center"><button type="submit">Envoyer un Message</button></div>
+            </form>
+        </div>
     </div>
-
-    <div class="col-lg-8">
-        <form action="{{ path('contact') }}" method="post" role="form" class="php-email-form">
-        <div class="row">
-            <div class="col-md-6 form-group">
-            <input type="text" name="name" class="form-control" id="name" placeholder="votre nom" required>
-            </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-            <input type="email" class="form-control" name="email" id="email" placeholder="votre Email" required>
-            </div>
-        </div>
-        <div class="form-group mt-3">
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="objet" required>
-        </div>
-        <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="7" placeholder="Message" required></textarea>
-        </div>
-        <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your message has been sent. Thank you!</div>
-        </div>
-        <div class="text-center"><button type="submit">Envoyer un Message</button></div>
-        </form>
-    </div><!-- End Contact Form -->
-
-    </div>
-
 </div>
-</section><!-- End Contact Section -->
-
-</main><!-- End #main -->
-
-<script>
-    // Validation du formulaire
-document.querySelector('.php-email-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    var name = document.getElementById('name').value.trim();
-    var email = document.getElementById('email').value.trim();
-    var subject = document.getElementById('subject').value.trim();
-    var message = document.getElementById('message').value.trim();
-    var errorMessage = document.querySelector('.error-message');
-    var sentMessage = document.querySelector('.sent-message');
-
-    // Vérification des champs
-    if (name === '' || email === '' || subject === '' || message === '') {
-        errorMessage.innerHTML = 'Veuillez remplir tous les champs.';
-        errorMessage.style.display = 'block';
-        sentMessage.style.display = 'none';
-    } else if (!validateEmail(email)) {
-        errorMessage.innerHTML = 'Veuillez entrer une adresse email valide.';
-        errorMessage.style.display = 'block';
-        sentMessage.style.display = 'none';
-    } else {
-        errorMessage.style.display = 'none';
-        sentMessage.style.display = 'block';
-    }
-});
-
-// Fonction de validation d'email
-function validateEmail(email) {
-    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-// Effet de clic du bouton
-var submitButton = document.querySelector('.php-email-form button[type="submit"]');
-submitButton.addEventListener('click', function() {
-    submitButton.innerHTML = 'Envoi...';
-    setTimeout(function() {
-        submitButton.innerHTML = 'Envoyer un Message';
-    }, 2000);
-});
-
-</script>
 {% endblock %}

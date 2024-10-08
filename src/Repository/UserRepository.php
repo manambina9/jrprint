@@ -8,6 +8,10 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Statement;
+
+
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -18,6 +22,28 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         parent::__construct($registry, User::class);
     }
+
+    public function countUsersByMonth(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+    
+        $sql = '
+            SELECT MONTH(u.created_at) AS month, COUNT(u.id) AS count
+            FROM user u
+            GROUP BY month
+            ORDER BY month ASC
+        ';
+    
+        $stmt = $conn->executeQuery($sql);
+    
+        return $stmt->fetchAllAssociative(); 
+    }
+    
+    
+
+    
+          
+
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
