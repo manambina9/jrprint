@@ -5,25 +5,107 @@
 {% block body %}
 <style>
     .bordered-container {
-        border: solid #000 1px;
+        border: solid #007bff 2px;
+        border-radius: 8px;
+        padding: 30px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
     }
-    h1{
+
+    .bordered-container:hover {
+        transform: translateY(-5px);
+    }
+
+    h1 {
         margin-top: 20px;
+        color: #333;
+        font-size: 28px;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .alert {
+        margin-bottom: 20px;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+    .small-text {
+        font-size: 0.9em;
+        color: #666;
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        padding: 10px;
+        transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #0056b3;
+        box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    .form-group {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .form-group i {
+        position: absolute;
+        left: 10px;
+        top: 12px;
+        color: #007bff;
+    }
+
+    .form-group input {
+        padding-left: 30px; /* Adjust padding for icon */
     }
 </style>
+
 <div class="container mt-4 mb-4 bordered-container">
     {% for flash_error in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
+    {% for flash_success in app.flashes('reset_password_success') %}
+        <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+    {% endfor %}
+    
     <h1>Réinitialiser votre mot de passe</h1>
 
     {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email) }}
-        <div>
-            <small>
-                Entrez votre adresse e-mail et nous vous enverrons un
-                lien pour réinitialiser votre mot de passe.
-            </small>
+        <div class="form-group">
+            {{ form_row(requestForm.email, {
+                'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Votre adresse e-mail',
+                    'aria-label': 'Adresse e-mail'
+                }
+            }) }}
+        </div>
+        <div class="small-text">
+            Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
         </div>
 
         <button class="btn btn-primary mb-4 mt-2">Envoyer l'email</button>

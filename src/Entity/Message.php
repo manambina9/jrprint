@@ -2,86 +2,89 @@
 
 namespace App\Entity;
 
-use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: MessageRepository::class)]
+#[ORM\Entity()]
 class Message
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank]
-    private ?User $sender = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $name = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank]
-    private ?User $receiver = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $email = null;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $subject = null;
 
     #[ORM\Column(type: 'text')]
-    #[Assert\NotBlank]
-    private ?string $content = null;
+    private ?string $message = null;
 
     #[ORM\Column(type: 'datetime')]
-    #[Assert\NotNull]
-    private ?\DateTimeInterface $sentAt = null;
+    private ?\DateTimeInterface $createdAt = null;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getSender(): ?User
+    public function getName(): ?string
     {
-        return $this->sender;
+        return $this->name;
     }
 
-    public function setSender(User $sender): static
+    public function setName(string $name): self
     {
-        $this->sender = $sender;
-
+        $this->name = $name;
         return $this;
     }
 
-    public function getReceiver(): ?User
+    public function getEmail(): ?string
     {
-        return $this->receiver;
+        return $this->email;
     }
 
-    public function setReceiver(User $receiver): static
+    public function setEmail(string $email): self
     {
-        $this->receiver = $receiver;
-
+        $this->email = $email;
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getSubject(): ?string
     {
-        return $this->content;
+        return $this->subject;
     }
 
-    public function setContent(string $content): static
+    public function setSubject(string $subject): self
     {
-        $this->content = $content;
-
+        $this->subject = $subject;
         return $this;
     }
 
-    public function getSentAt(): ?\DateTimeInterface
+    public function getMessage(): ?string
     {
-        return $this->sentAt;
+        return $this->message;
     }
 
-    public function setSentAt(\DateTimeInterface $sentAt): static
+    public function setMessage(string $message): self
     {
-        $this->sentAt = $sentAt;
+        $this->message = $message;
+        return $this;
+    }
 
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }
