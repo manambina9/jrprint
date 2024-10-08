@@ -1,0 +1,10 @@
+fos_ck_editor:
+    default_config: default
+    configs:
+        default:
+            toolbar:
+                - [ 'Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat', '-', 'Blockquote', '-', 'Outdent', 'Indent', 'justifyLeft', 'justifyRight', 'justifyBlock' ]
+                - [ 'NumberedList', 'BulletedList', 'Link', 'Unlink' ]
+                - [ 'Image', 'Table', 'HorizontalRule','Styles', 'Format' , 'Font' , 'FontSize']
+                - [ 'TextColor', 'BGColor']
+                - [ 'Source', 'Maximize' ]

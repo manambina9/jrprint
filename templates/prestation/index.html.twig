@@ -1,20 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PrestationController!{% endblock %}
+{% block title %} jr_print | Prestation {% endblock %}
 
 {% block body %}
-
+<head>
+  <link href="{{ asset('css/prestation.css') }}" rel="stylesheet">
+</head>
 <main id="main">
     <!-- === prestation Section ======= -->
     <section id="portfolio" class="portfolio sections-bg">
-      <div class="container" data-aos="fade-up">
+      <div class="container">
 
         <div class="section-header">
           <h2>Préstations</h2>
           <p>Quam sed id excepturi ccusantium dolorem ut quis dolores nisi llum nostrum enim velit qui ut et autem uia reprehenderit sunt deleniti</p>
         </div>
 
-        <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
+        <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos-delay="100">
 
           <div>
             <ul class="portfolio-flters">
@@ -36,7 +38,7 @@
           <!-- panneau 2x1-->
             <div class="col-xl-4 col-md-6 portfolio-item filter-app">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/panneau/2x1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/panneau/panneau/2x1.PNG" class="img-fluid" alt=""  style ="width:720px; heigth:500px;"></a>
+                <a href="asset/img/prestation/panneau/2x1.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/panneau/panneau/2x1.PNG" class="img-fluid" alt=""  style ="width:720px"; "heigth:500px;"></a>
                 <div class="portfolio-info">
                   <h4><a href="">Panneau sucette – Format 2*1</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -46,7 +48,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-product">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/Habillage/car1.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/Habillage/car1.JPG" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/Habillage/car1.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/Habillage/car1.JPG" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Habillage véhicules</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -56,7 +58,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/decoration/deco1.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/decoration/deco1.JPG" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/decoration/deco1.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/decoration/deco1.JPG" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Décorations évènementielles </a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -66,7 +68,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-books">
               <div class="portfolio-wrap">
-                <a href="aassets/img/prestation/autre/sil.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/autre/sil.jpg" class="img-fluid" alt=""></a>
+                <a href="aasset/images/prestation/autre/sil.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/autre/sil.jpg" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Sihlouettes</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -77,7 +79,7 @@
                       <!-- panneau 4x3-->
             <div class="col-xl-4 col-md-6 portfolio-item filter-app">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/panneau/4x3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/panneau/panneau/4x3.jpg" class="img-fluid" alt="" style ="width:720px; heigth:500px;"></a>
+                <a href="asset/images/prestation/panneau/4x3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/panneau/panneau/4x3.jpg" class="img-fluid" alt="" style ="width:720px"; "heigth:500px;"></a>
                 <div class="portfolio-info">
                   <h4><a href="">Panneau – Format 4x3 </a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -87,7 +89,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-product">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/Habillage/car2.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/Habillage/car2.JPG" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/Habillage/car2.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/Habillage/car2.JPG" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Habillage véhicules</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -97,7 +99,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/decoration/deco2.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/decoration/deco2.JPG" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/decoration/deco2.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/decoration/deco2.JPG" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Décorations Plaque sur PVC </a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -107,7 +109,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-books">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/autre/barea.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/autre/barea.jpg" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/autre/barea.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/autre/barea.jpg" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Photobooth</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -115,20 +117,21 @@
               </div>
             </div><!-- fin de prestation Item -->
 
-                      <!-- panneau 6x3-->
+
+            <!-- panneau 8x3-->
             <div class="col-xl-4 col-md-6 portfolio-item filter-app">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/panneau/3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/panneau/panneau/6x3.jpg" class="img-fluid" alt="" style ="width:720px; heigth:500px;"></a>
+                <a href="asset/images/prestation/panneau/4.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/panneau/panneau/8x3.jpg" class="img-fluid" alt="" style ="width:720px"; "heigth:500px;"></a>
                 <div class="portfolio-info">
-                  <h4><a href="">Panneau – Format 6x3</a></h4>
+                  <h4><a href="">Panneau – Format 8x3</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
             </div><!-- fin de prestation Item -->
-
+            
             <div class="col-xl-4 col-md-6 portfolio-item filter-product">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/Habillage/vitr.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/Habillage/vitr.JPG" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/Habillage/vitr.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/Habillage/vitr.JPG" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Habillages vitrines / Vitrophanie </a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -138,7 +141,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/decoration/deco3.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/decoration/deco3.JPG" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/decoration/deco3.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/decoration/deco3.JPG" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Branding 3</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -148,7 +151,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-books">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/autre/call.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/autre/call.jpg" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/autre/call.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/autre/call.jpg" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Photocall </a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -156,20 +159,21 @@
               </div>
             </div><!-- fin de prestation Item -->
 
-                      <!-- panneau 8x3-->
+            <!-- panneau 6x3-->
             <div class="col-xl-4 col-md-6 portfolio-item filter-app">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/panneau/4.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/panneau/panneau/8x3.jpg" class="img-fluid" alt="" style ="width:720px; heigth:500px;"></a>
+                <a href="asset/images/prestation/panneau/3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/panneau/panneau/6x3.jpg" class="img-fluid" alt="" style ="width:720px"; "heigth:700px;"></a>
                 <div class="portfolio-info">
-                  <h4><a href="">Panneau – Format 8x3</a></h4>
+                  <h4><a href="">Panneau – Format 6x3</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
               </div>
             </div><!-- fin de prestation Item -->
+          
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-product">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/Habillage/cuve.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/Habillage/cuve.JPG" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/Habillage/cuve.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/Habillage/cuve.JPG" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Habillages cuves & Transtack</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -180,7 +184,7 @@
               <!-- panneau 9x3-->
             <div class="col-xl-4 col-md-6 portfolio-item filter-app">
               <div class="portfolio-wrap">
-                <a style ="width:720px; heigth:500px;" href="assets/img/prestation/panneau/5.jpg , assets/img/prestation/panneau/9x3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/panneau/panneau/9x3.jpg" class="img-fluid" alt="" ></a>
+                <a style ="width:720px";" heigth:500px;" href="asset/images/prestation/panneau/5.jpg , asset/images/prestation/panneau/9x3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/panneau/panneau/9x3.jpg" class="img-fluid" alt="" ></a>
                 <div class="portfolio-info">
                   <h4><a href="">Panneau – Format 9x3</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -190,7 +194,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-product">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/Habillage/comp.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/Habillage/comp.JPG" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/Habillage/comp.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/Habillage/comp.JPG" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Habillages comptoirs</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -200,7 +204,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-books">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/autre/stop.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/autre/stop.jpg" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/autre/stop.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/autre/stop.jpg" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Stop trottoir </a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -212,8 +216,8 @@
               
               <div class="col-xl-4 col-md-6 portfolio-item filter-app">
                 <div class="portfolio-wrap">
-                  <a style="width:720px; height:500px;" href="assets/img/prestation/panneau/12x3.jpg" data-gallery="portfolio-gallery-app" class="glightbox">
-                    <img src="assets/img/prestation/panneau/panneau/12x3.jpg" class="img-fluid" alt="">
+                  <a style="width:720px; height:500px;" href="asset/images/prestation/panneau/12x3.jpg" data-gallery="portfolio-gallery-app" class="glightbox">
+                    <img src="asset/images/prestation/panneau/panneau/12x3.jpg" class="img-fluid" alt="">
                   </a>
                   <div class="portfolio-info">
                     <h4><a href="">Panneau – Format 12x3</a></h4>
@@ -224,7 +228,7 @@
 
               <div class="col-xl-4 col-md-6 portfolio-item filter-product">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/Habillage/deco.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/Habillage/deco.JPG" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/Habillage/deco.JPG" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/Habillage/deco.JPG" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Habillages boutiques</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -234,7 +238,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-books">
               <div class="portfolio-wrap">
-                <a href="assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
+                <a href="asset/images/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Totem</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -244,7 +248,7 @@
 
             <div class="col-xl-4 col-md-6 portfolio-item filter-books">
               <div class="portfolio-wrap">
-                <a href="assets/img/prestation/autre/bache.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/prestation/autre/bache.jpg" class="img-fluid" alt=""></a>
+                <a href="asset/images/prestation/autre/bache.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="asset/images/prestation/autre/bache.jpg" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="">Bâche tendue</a></h4>
                   <p>Lorem ipsum, dolor sit amet consectetur</p>
@@ -270,5 +274,7 @@
 <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <div id="preloader"></div>
-
+<head>
+  <script src="js/prestation.js"></script>
+</head>
 {% endblock %}

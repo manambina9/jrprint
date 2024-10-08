@@ -319,3 +319,48 @@ footer .social-icons a {
   }
   
   
+  .stats-counter {
+    padding: 60px 0;
+  }
+  
+  .stats-counter .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .stats-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .stats-item .purecounter {
+    font-size: 40px;
+    color: #24a08b; /* Couleur verte pour les chiffres */
+    font-weight: bold;
+  }
+  
+  .stats-item p {
+    font-size: 25px;
+    margin-left: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .row {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .col-lg-6 {
+      width: 100%;
+    }
+  
+    .stats-item p {
+      font-size: 22px;
+    }
+  
+    .stats-item .purecounter {
+      font-size: 36px;
+    }
+  }
+  

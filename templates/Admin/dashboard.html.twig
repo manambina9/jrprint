@@ -1,0 +1,181 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+<div class="container">
+    <!-- Statistiques -->
+    <span style="display: block; text-align: center; margin: 40px 0; background: linear-gradient(145deg, #007bff, #00c6ff); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); color: white; position: relative; overflow: hidden;">
+    
+        <!-- Éléments graphiques en arrière-plan -->
+        <div style="position: absolute; top: -50px; right: -50px; background-color: rgba(255, 255, 255, 0.15); width: 140px; height: 140px; border-radius: 50%; z-index: 0;"></div>
+        <div style="position: absolute; bottom: -60px; left: -60px; background-color: rgba(255, 255, 255, 0.15); width: 180px; height: 180px; border-radius: 50%; z-index: 0;"></div>
+        <div style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.1); width: 200px; height: 200px; border-radius: 50%; z-index: 0;"></div>
+    
+        <!-- Contenu -->
+        <h5 style="font-size: 32px; font-weight: bold; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; position: relative; z-index: 1;">Bienvenue sur votre tableau de bord !</h5>
+        <p style="font-size: 20px; font-weight: 300; color: rgba(255, 255, 255, 0.9); margin-bottom: 0; position: relative; z-index: 1;">Gérez vos panneaux publicitaires et suivez vos projets en temps réel.</p>
+    </span>
+    
+    
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Panneaux disponibles</h5>
+                    <p class="card-text display-4"><span>12</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Panneaux loués</h5>
+                    <p class="card-text display-4"><span>8</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h5 class="card-title">Projets d'habillage </h5>
+                    <p class="card-text display-4"><span>5</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card text-white bg-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Revenus générés</h5>
+                    <p class="card-text display-4">12000Ar</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+    <div class="col-lg-3 col-sm-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users"></i> Gestion des utilisateurs</h5>
+                <p class="card-text">Ajouter ou modifier des utilisateurs.</p>
+                <a href="{{ path('app_accueil') }}" class="btn btn-primary mt-auto">Voir</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fa-solid fa-gear"></i> Gestion des panneaux</h5>
+                <p class="card-text">Voir et gérer les panneaux publicitaires.</p>
+                <a href="{{ path('app_accueil') }}" class="btn btn-success mt-auto">Voir</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-tools"></i> Projets d'habillage</h5>
+                <p class="card-text">Suivre les projets d'habillage en cours.</p>
+                <a href="{{ path('app_accueil') }}" class="btn btn-warning mt-auto">Voir</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-chart-line"></i> Statistiques</h5>
+                <p class="card-text">Voir les statistiques générales.</p>
+                <a href="{{ path('app_accueil') }}" class="btn btn-danger mt-auto">Voir</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <!-- Graphiques des statistiques -->
+    <div class="row">
+        <!-- Graphique des revenus -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Revenus par mois</h5>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Nouveau graphique pour les utilisateurs inscrits et les panneaux loués -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Utilisateurs et panneaux loués par mois</h5>
+                    <canvas id="userPanelChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Inclusion de Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Script pour les graphiques -->
+<script>
+    // Graphique des revenus
+    var ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctxRevenue, {
+        type: 'line', // Type de graphique
+        data: {
+            labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'], // Mois
+            datasets: [{
+                label: 'Revenus (en Ar)',
+                data: [5000, 7000, 4000, 8000, 9000, 10000, 12000], // Données des revenus
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true // L'axe Y commence à zéro
+                }
+            }
+        }
+    });
+
+    // Nouveau graphique pour les utilisateurs inscrits et les panneaux loués
+    var ctxUserPanel = document.getElementById('userPanelChart').getContext('2d');
+    var userPanelChart = new Chart(ctxUserPanel, {
+        type: 'line', // Type de graphique
+        data: {
+            labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'], // Mois
+            datasets: [
+                {
+                    label: 'Utilisateurs inscrits',
+                    data: [50, 60, 55, 70, 65, 80, 90], // Données des utilisateurs inscrits
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: true
+                },
+                {
+                    label: 'Panneaux loués',
+                    data: [8, 12, 9, 15, 10, 18, 14], // Données des panneaux loués
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 2,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true 
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

@@ -1,54 +1,103 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AvantagesController!{% endblock %}
+{% block title %}jr_print | Avantages{% endblock %}
 
 {% block body %}
+<head>
+  <link href="{{ asset('css/avantages.css') }}" rel="stylesheet">
+</head>
 
-  <main id="advantages">
-    <h1 class="text-center">Choisissez JR Print pour vos impressions et locations professionnelles</h1>
 
-    <section class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <h2>Des solutions adaptées à vos besoins</h2>
-          <ul>
-            <li>Impression de qualité sur divers supports : panneaux publicitaires, roll-ups, bâches, etc.</li>
-            <li>Location de matériel pour vos événements et salons</li>
-            <li>Large choix de dimensions et de finitions</li>
-            <li>Conseils personnalisés pour un impact maximal</li>
-          </ul>
-        </div>
-        <div class="col-lg-6">
-          <img src="assets/img/advantages-banner.jpg" alt="Visual of advantages" class="img-fluid">
-        </div>
+<main id="advantages">
+  <h1 class="text-center">Choisissez JR Print pour vos impressions et locations professionnelles</h1>
+
+  <!-- Première section : Solutions adaptées -->
+  <section class="container mb-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h2>Des solutions adaptées à vos besoins</h2>
+        <ul>
+          <li>Impression de qualité sur divers supports : panneaux publicitaires, roll-ups, bâches, etc.</li>
+          <li>Location de matériel pour vos événements et salons</li>
+          <li>Large choix de dimensions et de finitions</li>
+          <li>Conseils personnalisés pour un impact maximal</li>
+        </ul>
       </div>
-    </section>
-
-    <section class="container">
-      <h2>Nos avantages</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <i class="bi bi-check-circle"></i>
-          <h3>Matériel de pointe</h3>
-          <p>Technologies d'impression et de finition à la pointe pour un rendu impeccable.</p>
-        </div>
-        <div class="col-md-4">
-          <i class="bi bi-check-circle"></i>
-          <h3>Délais rapides</h3>
-          <p>Respect des délais, même les plus serrés, pour répondre à vos besoins urgents.</p>
-        </div>
-        <div class="col-md-4">
-          <i class="bi bi-check-circle"></i>
-          <h3>Tarifs compétitifs</h3>
-          <p>Prix attractifs pour vous permettre de maîtriser votre budget.</p>
-        </div>
+      <div class="col-lg-6">
+        <img src="assets/img/advantages-banner.jpg" alt="Visual of advantages" class="img-fluid">
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="container">
-      <h2>Nos engagements</h2>
-      <p>Satisfaction client garantie, respect de l'environnement, professionnalisme et expertise à votre service.</p>
-      <a href="contact.php" class="btn btn-primary">Demander un devis</a>
-    </section>
-  </main>
+  <!-- Nouvelle section : Notre équipe -->
+  <section class="container mb-5">
+    <h2>Une équipe dédiée à votre service</h2>
+    <p>Notre équipe d'experts est là pour vous accompagner tout au long de votre projet, de la conception à la réalisation.</p>
+    <div class="row text-center">
+      <div class="col-md-4">
+        <img src="assets/img/team-member-1.jpg" alt="Membre de l'équipe" class="img-fluid rounded-circle mb-3">
+        <h3>Jean Dupont</h3>
+        <p>Directeur Commercial</p>
+      </div>
+      <div class="col-md-4">
+        <img src="assets/img/team-member-2.jpg" alt="Membre de l'équipe" class="img-fluid rounded-circle mb-3">
+        <h3>Marie Dubois</h3>
+        <p>Responsable Marketing</p>
+      </div>
+      <div class="col-md-4">
+        <img src="assets/img/team-member-3.jpg" alt="Membre de l'équipe" class="img-fluid rounded-circle mb-3">
+        <h3>Luc Martin</h3>
+        <p>Chef de Projet</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section existante : Nos avantages -->
+  <section class="container mb-5">
+    <h2>Nos avantages</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <i class="bi bi-check-circle"></i>
+        <h3>Matériel de pointe</h3>
+        <p>Technologies d'impression et de finition à la pointe pour un rendu impeccable.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-check-circle"></i>
+        <h3>Délais rapides</h3>
+        <p>Respect des délais, même les plus serrés, pour répondre à vos besoins urgents.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-check-circle"></i>
+        <h3>Tarifs compétitifs</h3>
+        <p>Prix attractifs pour vous permettre de maîtriser votre budget.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nouvelle section : Témoignages clients -->
+  <section class="container mb-5">
+    <h2>Ce que disent nos clients</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <blockquote class="blockquote">
+          <p>"JR Print a su répondre à nos attentes avec professionnalisme et réactivité. Nous recommandons vivement leurs services."</p>
+          <footer class="blockquote-footer">Sophie L., <cite title="Source Title">Entreprise XYZ</cite></footer>
+        </blockquote>
+      </div>
+      <div class="col-md-6">
+        <blockquote class="blockquote">
+          <p>"Une qualité d'impression exceptionnelle et une équipe à l'écoute. Merci à toute l'équipe de JR Print !"</p>
+          <footer class="blockquote-footer">Marc D., <cite title="Source Title">Société ABC</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section existante : Nos engagements -->
+  <section class="container text-center">
+    <h2>Nos engagements</h2>
+    <p>Satisfaction client garantie, respect de l'environnement, professionnalisme et expertise à votre service.</p>
+    <a href="{{ path('contact') }}" class="btn btn-primary">Demander un devis</a>
+  </section>
+</main
 {% endblock %}
