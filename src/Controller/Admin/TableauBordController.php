@@ -23,7 +23,7 @@ class TableauBordController extends AbstractDashboardController
     {
         // Récupérer les statistiques des utilisateurs par mois
         $usersByMonth = $userRepository->countUsersByMonth();
-        
+        //$sales = {{Entity.Command.Id}};
         // Variables de démonstration
         $sales = 145;
         $revenue = 3264; 

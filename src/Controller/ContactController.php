@@ -25,7 +25,6 @@ class ContactController extends AbstractController
             $subject = $request->request->get('subject');
             $messageContent = $request->request->get('message');
 
-            // Validation
             $validator = Validation::createValidator();
             $emailConstraint = new EmailConstraint();
             $notBlankConstraint = new NotBlank();
@@ -33,37 +32,32 @@ class ContactController extends AbstractController
             $errors = $validator->validate($email, [$emailConstraint, $notBlankConstraint]);
 
             if (count($errors) > 0) {
-                // Ajout d'un message flash pour l'erreur
                 $this->addFlash('error', 'Veuillez entrer une adresse email valide.');
                 return $this->redirectToRoute('contact');
             }
-
-            // Envoi de l'email
+            //mail
             $emailMessage = (new Email())
                 ->from($email)
-                ->to('kellymanambina@gmail.com') // l'adresse e-mail de l'administrateur
+                ->to('kellymanambina@gmail.com') 
                 ->subject($subject)
                 ->text("Name: $name\nEmail: $email\nMessage:\n$messageContent");
 
             try {
                 $mailer->send($emailMessage);
 
-                // Enregistrement dans la base de données
+                //base de données
                 $message = new Message();
                 $message->setName($name);
                 $message->setEmail($email);
                 $message->setSubject($subject);
                 $message->setMessage($messageContent);
                 $message->setCreatedAt(new \DateTime());
-
-                // Persister et flush
+ 
                 $entityManager->persist($message);
                 $entityManager->flush();
-
-                // Ajout d'un message flash pour le succès
+ 
                 $this->addFlash('success', 'Votre message a été envoyé avec succès!');
-            } catch (\Exception $e) {
-                // Ajout d'un message flash pour l'erreur d'envoi
+            } catch (\Exception $e) { 
                 $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer plus tard.');
             }
 

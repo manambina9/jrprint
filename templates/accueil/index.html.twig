@@ -185,63 +185,185 @@
 
 
 <!-- services -->
-<section id="hero" class="hero" style="background: transparent;" style="background-color: white;">
-    <div class="icon-boxes position-relative" style="background-color: white;">
-        <div class="container position-relative" style="background-color: white;">
-          <div class="row gy-4 mt-5">
-      
-            <div class="col-xl-3 col-md-6" data-aos-delay="100">
-              <div class="card px-2">
-                <div class="side side--front">
-                  <h4 class="title text-align-start"><img src="images/car.PNG" height="200px" width="310px" alt=""></h4>
-                </div>
-                <div class="side side--back">
-                  <i class="text-white fs-2" style="text-decoration: solid; align-items: center; text-align: center;">Habillage des Voitures</i> 
-                  <a href="" class="btn-discover">Découvrir</a>
-                </div>
-              </div>
-            </div><!--End Icon Box -->
-      
-            <div class="col-xl-3 col-md-6" data-aos-delay="200">
-              <div class="card ">
-                <div class="side side--front">
-                  <h4 class="title text-align-start"><img src="images/bmoi.PNG" height="210px" width="310px" alt=""></h4>
-                </div>
-                <div class="side side--back">
-                  <div class="content">
-                    <i class="text-white fs-2" style="text-decoration: solid; align-items: center; text-align: center;">Habillages comptoirs</i>
-                    <a href="" class="btn-discover">Découvrir</a>
-                  </div>
-                </div>
-              </div>
-            </div><!--End Icon Box -->
-      
-            <div class="col-xl-3 col-md-6" data-aos-delay="300" style="background-color: white;">
-              <div class="card">
-                <div class="side side--front">
-                  <h4 class="title text-align-start"><img src="images/m_trade.PNG" height="200px" width="310px" alt=""></h4>
-                </div>
-                <div class="side side--back">
-                  <i class="text-white fs-2" style="text-decoration: solid; align-items: center; text-align: center;">Habillages vitrines</i>
-                  <a href="" class="btn-discover">Découvrir</a>
-                </div>
-              </div>
-            </div><!--End Icon Box -->
-      
-            <div class="col-xl-3 col-md-6" data-aos-delay="500"; style="background-color: white;">
-              <div class="card">
-                <div class="side side--front">
-                  <h4 class="title text-align-start"><img src="images/jovena.PNG" height="200px" width="310px" alt=""></h4>
-                </div>
-                <div class="side side--back">
-                  <i class="text-white fs-2" style="text-decoration: solid; align-items: center; text-align: center;">Habillages cuves & Transtack</i>
-                  <a href="" class="btn-discover">Découvrir</a>
-                </div>
-              </div>
-            </div><!--End Icon Box -->
+<!-- Services Section in Grid -->
+<section id="services" style="background-color: #f8f9fa; padding: 50px 0;">
+  <div class="container">
+    <div class="row gy-4">
+
+      <!-- Service 1 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="service-item">
+          <img src="images/car.PNG" alt="Habillage des Voitures" class="service-img">
+          <div class="overlay">
+            <h4 class="text-white">Habillage des Voitures</h4>
+            <a href="#" class="btn btn-outline-light">Découvrir</a>
           </div>
         </div>
       </div>
+
+      <!-- Service 2 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="service-item">
+          <img src="images/bmoi.PNG" alt="Habillages comptoirs" class="service-img">
+          <div class="overlay">
+            <h4 class="text-white">Habillages comptoirs</h4>
+            <a href="#" class="btn btn-outline-light">Découvrir</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="service-item">
+          <img src="images/m_trade.PNG" alt="Habillages vitrines" class="service-img">
+          <div class="overlay">
+            <h4 class="text-white">Habillages vitrines</h4>
+            <a href="#" class="btn btn-outline-light">Découvrir</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="col-md-6 col-lg-3">
+        <div class="service-item">
+          <img src="images/jovena.PNG" alt="Habillages cuves & Transtack" class="service-img">
+          <div class="overlay">
+            <h4 class="text-white">Habillages cuves & Transtack</h4>
+            <a href="#" class="btn btn-outline-light">Découvrir</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <style>
+.service-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 15px; 
+  background-color: #fff;
+  padding: 15px;  
+  text-align: center; 
+}
+
+.service-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background-color: #f0f0f0; 
+}
+
+.service-img {
+  width: 100%;
+  height: 250px; 
+  object-fit: cover;  
+  border-radius: 10px;  
+  transition: transform 0.3s ease, filter 0.3s ease;  
+}
+
+.service-item:hover .service-img {
+  transform: scale(1.1);  
+  filter: brightness(85%);  
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);  
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.4s ease;  
+  padding: 20px; 
+}
+
+.service-item:hover .overlay {
+  opacity: 1; 
+}
+
+.overlay h4 {
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);  
+  animation: fadeIn 0.5s ease;
+}
+
+.overlay p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); 
+  animation: fadeIn 0.5s ease;
+  max-width: 300px; 
+}
+
+.btn-outline-light {
+  border: 2px solid white;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.btn-outline-light:hover {
+  background-color: white;
+  color: #000;
+  transform: translateY(-3px);  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+ 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);  
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .service-item {
+    margin: 10px 0;  
+    padding: 10px;  
+  }
+
+  .service-img {
+    height: 200px; 
+  }
+
+  .overlay h4 {
+    font-size: 1.5rem; 
+  }
+
+  .overlay p {
+    font-size: 0.9rem;  
+    max-width: none; 
+  }
+
+  .btn-outline-light {
+    padding: 8px 16px;  
+    font-size: 0.9rem; 
+  }
+}
+
+  </style>
 </section>
 
 <!-- Section Témoignages -->
