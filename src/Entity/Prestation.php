@@ -36,23 +36,25 @@ class Prestation
     private bool $available = true;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $imageUrl = null; // URL de l'image de la prestation
+    private ?string $imageUrl = null;
 
     #[ORM\Column(type: 'integer')]
     #[Assert\NotNull(message: "La quantité doit être spécifiée.")]
     #[Assert\PositiveOrZero(message: "La quantité doit être zéro ou positive.")]
-    private ?int $quantityAvailable = 0; // Quantité disponible
+    private ?int $quantityAvailable = 0;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null; // Date de mise à jour
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
     }
+
+    // Getters and Setters...
 
     public function getId(): ?int
     {
@@ -67,7 +69,7 @@ class Prestation
     public function setTitle(string $title): static
     {
         $this->title = $title;
-        $this->setUpdatedAt(new \DateTimeImmutable());  
+
         return $this;
     }
 
@@ -79,7 +81,7 @@ class Prestation
     public function setDescription(string $description): static
     {
         $this->description = $description;
-        $this->setUpdatedAt(new \DateTimeImmutable());  
+
         return $this;
     }
 
@@ -91,6 +93,7 @@ class Prestation
     public function setPrice(float $price): static
     {
         $this->price = $price;
+
         return $this;
     }
 
@@ -102,6 +105,7 @@ class Prestation
     public function setCategory(string $category): static
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -113,6 +117,7 @@ class Prestation
     public function setAvailable(bool $available): static
     {
         $this->available = $available;
+
         return $this;
     }
 
@@ -124,6 +129,7 @@ class Prestation
     public function setImageUrl(?string $imageUrl): static
     {
         $this->imageUrl = $imageUrl;
+
         return $this;
     }
 
@@ -135,10 +141,11 @@ class Prestation
     public function setQuantityAvailable(int $quantityAvailable): static
     {
         $this->quantityAvailable = $quantityAvailable;
+
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -148,9 +155,18 @@ class Prestation
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
+    }
+
+    /**
+     * Convert the Prestation object to a string
+     */
+    public function __toString(): string
+    {
+        return $this->title ?: 'No Title'; // Remplace par le champ approprié
     }
 }

@@ -49,7 +49,7 @@ class TableauBordController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Produits', 'fas fa-box', Prestation::class);
         yield MenuItem::linkToCrud('Messages', 'fas fa-message', Message::class);
-        yield MenuItem::linkToCrud('Commandes', 'fas fa-shop', Message::class); 
+        yield MenuItem::linkToCrud('Commandes', 'fas fa-shop', Commande::class); 
         yield MenuItem::linkToCrud('Promotions', 'fas fa-percent', Message::class);
 
         yield MenuItem::section('Mode');
