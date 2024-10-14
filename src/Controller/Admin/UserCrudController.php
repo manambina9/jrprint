@@ -31,6 +31,7 @@ class UserCrudController extends AbstractCrudController
                 ])
                 ->allowMultipleChoices(),
             DateTimeField::new('createdAt')->setFormat('dd/MM/yyyy HH:mm')->hideOnForm(),
+            TextField::new('password'),
         ];
     }
-}
+} 

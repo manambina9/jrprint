@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PrestationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -49,12 +51,16 @@ class Prestation
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\OneToMany(mappedBy: "prestation", targetEntity: Promotion::class, cascade: ["persist", "remove"])]
+    private Collection $promotions;
+
     public function __construct()
     {
+        $this->promotions = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
     }
 
-    // Getters and Setters...
+    // Getters et setters...
 
     public function getId(): ?int
     {
@@ -163,10 +169,64 @@ class Prestation
     }
 
     /**
-     * Convert the Prestation object to a string
+     * @return Collection<int, Promotion>
      */
+    public function getPromotions(): Collection
+    {
+        return $this->promotions;
+    }
+
+    public function addPromotion(Promotion $promotion): static
+    {
+        if (!$this->promotions->contains($promotion)) {
+            $this->promotions->add($promotion);
+            $promotion->setPrestation($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromotion(Promotion $promotion): static
+    {
+        if ($this->promotions->removeElement($promotion)) {
+            // Unset the owning side of the relation if necessary
+            if ($promotion->getPrestation() === $this) {
+                $promotion->setPrestation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getActivePromotion(): ?Promotion
+    {
+        foreach ($this->promotions as $promotion) {
+            if ($promotion->isPromotionActive()) {
+                return $promotion;
+            }
+        }
+
+        return null;
+    }
+
+    public function getFinalPrice(): float
+    {
+        $activePromotion = $this->getActivePromotion();
+
+        if ($activePromotion) {
+            if ($activePromotion->getDiscountedPrice() !== null) {
+                return $activePromotion->getDiscountedPrice();
+            }
+            if ($activePromotion->getDiscountPercentage() !== null) {
+                return $this->price - ($this->price * ($activePromotion->getDiscountPercentage() / 100));
+            }
+        }
+
+        return $this->price;
+    }
+
     public function __toString(): string
     {
-        return $this->title ?: 'No Title'; // Remplace par le champ approprié
+        return $this->title ?: 'No Title';
     }
 }

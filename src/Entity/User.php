@@ -158,6 +158,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function __toString(): string
     {
-        return $this->entreprise ?: 'No Enterprise'; // Remplace par le champ approprié
+        return $this->email ?: 'No email';  
     }
 }

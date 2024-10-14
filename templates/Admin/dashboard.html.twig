@@ -63,7 +63,8 @@
             <div class="card-body">
                 <h5 class="card-title"><i class="fa-solid fa-gear"></i> Gestion des panneaux</h5>
                 <p class="card-text">Voir et gérer les panneaux publicitaires.</p>
-                <a href="{{ path('app_accueil') }}" class="btn btn-success mt-auto">Voir</a>
+                <a href="{{ path('admin', { 'crudAction': 'index', 'crudControllerFqcn': 'App\\Controller\\Admin\\CommandeCrudController' }) }}" class="btn btn-success mt-auto">Voir Commandes</a>
+
             </div>
         </div>
     </div>
