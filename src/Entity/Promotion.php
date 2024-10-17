@@ -109,4 +109,13 @@ class Promotion
         return $this->promotionStart !== null && $this->promotionEnd !== null &&
                $now >= $this->promotionStart && $now <= $this->promotionEnd;
     }
+
+    public function __toString(): string
+    {
+        // Retourne une représentation textuelle de l'entité Promotion
+        // Par exemple, tu peux utiliser le titre ou la date de début
+        return $this->discountPercentage !== null 
+            ? $this->discountPercentage . '% de réduction' 
+            : 'Promotion';
+    }
 }

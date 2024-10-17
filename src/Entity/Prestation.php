@@ -7,8 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: PrestationRepository::class)]
+#[Vich\Uploadable]
 class Prestation
 {
     #[ORM\Id]
@@ -36,6 +39,9 @@ class Prestation
     #[ORM\Column(type: 'boolean')]
     #[Assert\NotNull(message: "La disponibilité doit être spécifiée.")]
     private bool $available = true;
+
+    #[Vich\UploadableField(mapping: 'prestation_images', fileNameProperty: 'imageUrl')]
+    private ?File $imageFile = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $imageUrl = null;
@@ -125,6 +131,20 @@ class Prestation
         $this->available = $available;
 
         return $this;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if ($imageFile !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 
     public function getImageUrl(): ?string

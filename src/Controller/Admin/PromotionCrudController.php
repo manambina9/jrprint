@@ -19,12 +19,12 @@ class PromotionCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(), // Cache l'ID dans les formulaires de création et d'édition
+            IdField::new('id')->hideOnForm(),  
             NumberField::new('discountPercentage', 'Pourcentage de réduction')->setNumDecimals(2),
             NumberField::new('discountedPrice', 'Prix réduit')->setNumDecimals(2),
             DateTimeField::new('promotionStart', 'Début de la promotion'),
             DateTimeField::new('promotionEnd', 'Fin de la promotion'),
-            AssociationField::new('prestation', 'Prestation associée'), // Pour lier une prestation à la promotion
+            AssociationField::new('prestation', 'Prestation associée'),
         ];
     }
 }

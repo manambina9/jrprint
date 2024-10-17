@@ -12,6 +12,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PrestationCrudController extends AbstractCrudController
 {
@@ -38,10 +41,23 @@ class PrestationCrudController extends AbstractCrudController
                     'Bâches tendue' => 'baches_tendue',
                 ]),
             BooleanField::new('available', 'Disponible'),
-            TextField::new('imageUrl', 'URL de l\'image')->hideOnIndex(),
+
+            // Champ pour uploader une nouvelle image
+            TextField::new('imageFile', 'Image')
+                ->setFormType(VichImageType::class)
+                ->hideOnIndex(), // Masquer dans l'index
+
+            // Champ pour afficher l'image actuelle
+            ImageField::new('imageUrl', 'Image actuelle')
+                ->setBasePath('/images/prestations') // Correspond à uri_prefix
+                ->setUploadDir('public/images/prestations') // Spécifiez le répertoire de téléchargement
+                ->onlyOnForms(), // Afficher uniquement dans le formulaire
+
             IntegerField::new('quantityAvailable', 'Quantité disponible'),
             DateTimeField::new('createdAt', 'Créé le')->hideOnForm(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->hideOnForm(),
+
+            AssociationField::new('promotions', 'Promotions')->hideOnIndex(),
         ];
     }
 }
