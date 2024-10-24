@@ -12,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-
 class CommandeCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -23,11 +22,17 @@ class CommandeCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(),  
-            DateTimeField::new('dateCommande')->setLabel('Date de Commande')->hideOnIndex(),
+            IdField::new('id')->hideOnForm(),
+            DateTimeField::new('dateCommande')
+                ->setLabel('Date de Commande')
+                ->hideOnIndex(),
+            DateTimeField::new('dateDebutLocation')
+                ->setLabel('Date de Début de Location'),
+            DateTimeField::new('dateFinLocation')
+                ->setLabel('Date de Fin de Location'),
             MoneyField::new('montantTotal')
                 ->setLabel('Montant Total')
-                ->setCurrency('MGA'),  
+                ->setCurrency('MGA'),
             ChoiceField::new('statut')
                 ->setLabel('Statut')
                 ->setChoices([
@@ -36,10 +41,14 @@ class CommandeCrudController extends AbstractCrudController
                     'Livrée' => 'livrée',
                     'Annulée' => 'annulée',
                 ]),
-            AssociationField::new('client')->setLabel('Client'),  
-            AssociationField::new('prestation')->setLabel('Prestation'), 
+            AssociationField::new('client')->setLabel('Client'),
+            AssociationField::new('prestations')
+                ->setLabel('Prestations')
+                ->setFormTypeOption('multiple', true)
+                ->setFormTypeOption('by_reference', false)
+                ->autocomplete(),
             TextEditorField::new('detailCommande')
-                ->setLabel('Détails de la commande'), // Optionnel : pour personnaliser le label
+                ->setLabel('Détails de la commande'),
         ];
     }
 }

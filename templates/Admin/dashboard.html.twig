@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container"> 
-    <span style="display: block; text-align: center; margin: 40px 0; background: linear-gradient(145deg, #007bff, #00c6ff); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); color: white; position: relative; overflow: hidden;">
+    <span class="animated-background" style="display: block; text-align: center; margin: 40px 0; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); color: white; position: relative; overflow: hidden;">
      
         <div style="position: absolute; top: -50px; right: -50px; background-color: rgba(255, 255, 255, 0.15); width: 140px; height: 140px; border-radius: 50%; z-index: 0;"></div>
         <div style="position: absolute; bottom: -60px; left: -60px; background-color: rgba(255, 255, 255, 0.15); width: 180px; height: 180px; border-radius: 50%; z-index: 0;"></div>
@@ -12,36 +12,35 @@
         <p style="font-size: 20px; font-weight: 300; color: rgba(255, 255, 255, 0.9); margin-bottom: 0; position: relative; z-index: 1;">Gérez vos panneaux publicitaires et suivez vos projets en temps réel.</p>
     </span>
     
-    
     <div class="row">
         <div class="col-lg-3 col-sm-6 mb-4">
-            <div class="card text-white bg-primary">
+            <div class="card text-white bg-primary card-hover">
                 <div class="card-body">
-                    <h5 class="card-title">Panneaux disponibles</h5>
+                    <h5 class="card-title"><i class="fas fa-ad"></i> Panneaux disponibles</h5>
                     <p class="card-text display-4"><span>12</span></p>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 mb-4">
-            <div class="card text-white bg-success">
+            <div class="card text-white bg-success card-hover">
                 <div class="card-body">
-                    <h5 class="card-title">Panneaux loués</h5>
+                    <h5 class="card-title"><i class="fas fa-check-circle"></i> Panneaux loués</h5>
                     <p class="card-text display-4"><span>{{sales}}</span></p>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 mb-4">
-            <div class="card text-white bg-warning">
+            <div class="card text-white bg-warning card-hover">
                 <div class="card-body">
-                    <h5 class="card-title">Projets d'habillage </h5>
+                    <h5 class="card-title"><i class="fas fa-project-diagram"></i> Projets d'habillage</h5>
                     <p class="card-text display-4"><span>{{customers}}</span></p>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 mb-4">
-            <div class="card text-white bg-danger">
+            <div class="card text-white bg-danger card-hover">
                 <div class="card-body">
-                    <h5 class="card-title">Revenus générés</h5>
+                    <h5 class="card-title"><i class="fas fa-dollar-sign"></i> Revenus générés</h5>
                     <p class="card-text display-4">{{revenue}}</p>
                 </div>
             </div>
@@ -49,46 +48,44 @@
     </div>
 
     <div class="row">
-    <div class="col-lg-3 col-sm-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-users"></i> Gestion des utilisateurs</h5>
-                <p class="card-text">Ajouter ou modifier des utilisateurs.</p>
-                <a href="{{ path('app_accueil') }}" class="btn btn-primary mt-auto">Voir</a>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card card-hover">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-users"></i> Gestion des utilisateurs</h5>
+                    <p class="card-text">Ajouter ou modifier des utilisateurs.</p>
+                    <a href="{{ path('app_accueil') }}" class="btn btn-primary mt-auto">Voir</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card card-hover">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-tools"></i> Gestion des panneaux</h5>
+                    <p class="card-text">Voir et gérer les panneaux publicitaires.</p>
+                    <a href="{{ path('admin', { 'crudAction': 'index', 'crudControllerFqcn': 'App\\Controller\\Admin\\CommandeCrudController' }) }}" class="btn btn-success mt-auto">Voir Commandes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card card-hover">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-paint-brush"></i> Projets d'habillage</h5>
+                    <p class="card-text">Suivre les projets d'habillage en cours.</p>
+                    <a href="{{ path('app_accueil') }}" class="btn btn-warning mt-auto">Voir</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card card-hover">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-chart-line"></i> Statistiques</h5>
+                    <p class="card-text">Voir les statistiques générales.</p>
+                    <a href="{{ path('app_accueil') }}" class="btn btn-danger mt-auto">Voir</a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-sm-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fa-solid fa-gear"></i> Gestion des panneaux</h5>
-                <p class="card-text">Voir et gérer les panneaux publicitaires.</p>
-                <a href="{{ path('admin', { 'crudAction': 'index', 'crudControllerFqcn': 'App\\Controller\\Admin\\CommandeCrudController' }) }}" class="btn btn-success mt-auto">Voir Commandes</a>
 
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-tools"></i> Projets d'habillage</h5>
-                <p class="card-text">Suivre les projets d'habillage en cours.</p>
-                <a href="{{ path('app_accueil') }}" class="btn btn-warning mt-auto">Voir</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 mb-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-chart-line"></i> Statistiques</h5>
-                <p class="card-text">Voir les statistiques générales.</p>
-                <a href="{{ path('app_accueil') }}" class="btn btn-danger mt-auto">Voir</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
     <div class="row"> 
         <div class="col-lg-6 mb-4">
             <div class="card">
@@ -112,7 +109,6 @@
     
     <script> 
         var usersData = JSON.parse('{{ usersByMonth|json_encode|raw }}') || [];
-        console.log(usersData);
      
         var labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         var userCounts = Array(12).fill(0); 
@@ -158,5 +154,25 @@
             }
         });
     </script>
-    
+
+    <style>
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .animated-background {
+            background: linear-gradient(270deg, #007bff, #00c6ff);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+        }
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</div>
 {% endblock %}

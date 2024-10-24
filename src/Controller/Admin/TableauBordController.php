@@ -2,19 +2,20 @@
 
 namespace App\Controller\Admin;
 
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Message;
-use App\Entity\Prestation;
 use App\Entity\User;
+use App\Entity\Facture;
+use App\Entity\Message;
 use App\Entity\Commande;
 use App\Entity\Promotion;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use Proxies\__CG__\App\Entity\Message as EntityMessage;
+use App\Entity\Prestation;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use Proxies\__CG__\App\Entity\Message as EntityMessage;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class TableauBordController extends AbstractDashboardController
 {
@@ -51,7 +52,7 @@ class TableauBordController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Messages', 'fas fa-message', Message::class);
         yield MenuItem::linkToCrud('Commandes', 'fas fa-shop', Commande::class); 
         yield MenuItem::linkToCrud('Promotions', 'fas fa-percent', Promotion::class);
-        yield MenuItem::linkToCrud('Panneau loué', 'fas fa-percent', Message::class);
+        yield MenuItem::linkToCrud('Factures', 'fas fa-file-invoice', Facture::class);
         yield MenuItem::linkToCrud('Panneau dispo', 'fas fa-percent', Message::class);
 
         yield MenuItem::section('Mode');
