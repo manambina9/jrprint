@@ -25,4 +25,25 @@ class CommandeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function countPanneauxDisponibles(): int
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        
+        // Exécutez la requête pour compter les panneaux disponibles
+        $sql = 'SELECT COUNT(*) FROM prestation WHERE available = 1';
+        $stmt = $conn->executeQuery($sql);
+        
+        return (int) $stmt->fetchOne(); // Retourne le résultat comme un entier
+    }
+    
+    
+
+    public function calculateTotalRevenue(): float
+    {
+        return $this->createQueryBuilder('c')
+            ->select('SUM(c.montantTotal)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+// src/Controller/Admin/TableauBordController.php
 namespace App\Controller\Admin;
 
 use App\Entity\User;
@@ -9,32 +10,57 @@ use App\Entity\Commande;
 use App\Entity\Promotion;
 use App\Entity\Prestation;
 use App\Repository\UserRepository;
+use App\Repository\CommandeRepository;
+use App\Repository\FactureRepository; 
+use App\Repository\PrestationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use Proxies\__CG__\App\Entity\Message as EntityMessage;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class TableauBordController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
-    public function dashboard(UserRepository $userRepository): Response
-    {
-        // Récupérer les statistiques des utilisateurs par mois
+    public function dashboard(
+        UserRepository $userRepository,
+        CommandeRepository $commandeRepository,
+        FactureRepository $factureRepository,
+        PrestationRepository $prestationRepository
+    ): Response {
+        // Récupérer le nombre d'utilisateurs
         $usersByMonth = $userRepository->countUsersByMonth();
-        //$sales = {{Entity.Command.Id}};
-        // Variables de démonstration
-        $sales = 145;
-        $revenue = 3264; 
-        $customers = 1244; 
+        
+        // Récupérer le revenu total
+        $revenue = $factureRepository->getTotalRevenus();
 
+        $totalUsers = $userRepository->countUsers();
+
+        // Récupérer le nombre de commandes (panneaux loués)
+        $panneauxLoues = $commandeRepository->count([]);
+
+        // Récupérer les revenus générés (somme des factures)
+        $revenusGeneres = $factureRepository->getTotalRevenus();
+
+        $sales = $factureRepository->count([]);
+
+        $panneauxDisponibles = $commandeRepository->countPanneauxDisponibles();
+        dump($panneauxDisponibles); // Déboguer pour vérifier la valeur ici
+
+        $servicesAutresQuePanneaux = $prestationRepository->countServicesAutresQuePanneau();
+
+        // Récupérer le nombre total de clients
+        $customers = $userRepository->count([]);
         return $this->render('admin/dashboard.html.twig', [
-            'sales' => $sales,
-            'revenue' => $revenue,
-            'customers' => $customers,
+            'panneauxLoues' => $panneauxLoues,
+            'revenusGeneres' => $revenusGeneres,
+            'totalUsers' => $totalUsers,
             'usersByMonth' => $usersByMonth,
+            'sales' => $sales,
+            'panneauxDisponibles' => $panneauxDisponibles,
+            'customers' => $customers,
+            'revenue' => $revenue,
+            'servicesAutresQuePanneaux' => $servicesAutresQuePanneaux,
         ]);
     }
 
@@ -50,11 +76,9 @@ class TableauBordController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Services', 'fas fa-box', Prestation::class);
         yield MenuItem::linkToCrud('Messages', 'fas fa-message', Message::class);
-        yield MenuItem::linkToCrud('Commandes', 'fas fa-shop', Commande::class); 
+        yield MenuItem::linkToCrud('Commandes', 'fas fa-shop', Commande::class);
         yield MenuItem::linkToCrud('Promotions', 'fas fa-percent', Promotion::class);
         yield MenuItem::linkToCrud('Factures', 'fas fa-file-invoice', Facture::class);
-        yield MenuItem::linkToCrud('Panneau dispo', 'fas fa-percent', Message::class);
-
         yield MenuItem::section('Mode');
         yield MenuItem::linkToRoute('Passer en mode Client', 'fas fa-user-tie', 'app_user_page');
         yield MenuItem::linkToRoute('Accueil du site', 'fas fa-globe', 'app_accueil');
