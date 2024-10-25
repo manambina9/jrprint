@@ -39,6 +39,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $stmt->fetchAllAssociative(); 
     }
     
+    public function countUsers(): int
+    {
+        return $this->count([]);
+    }
     
 
     

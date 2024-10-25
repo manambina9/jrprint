@@ -3,7 +3,6 @@
 {% block content %}
 <div class="container"> 
     <span class="animated-background" style="display: block; text-align: center; margin: 40px 0; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); color: white; position: relative; overflow: hidden;">
-     
         <div style="position: absolute; top: -50px; right: -50px; background-color: rgba(255, 255, 255, 0.15); width: 140px; height: 140px; border-radius: 50%; z-index: 0;"></div>
         <div style="position: absolute; bottom: -60px; left: -60px; background-color: rgba(255, 255, 255, 0.15); width: 180px; height: 180px; border-radius: 50%; z-index: 0;"></div>
         <div style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.1); width: 200px; height: 200px; border-radius: 50%; z-index: 0;"></div>
@@ -17,7 +16,7 @@
             <div class="card text-white bg-primary card-hover">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-ad"></i> Panneaux disponibles</h5>
-                    <p class="card-text display-4"><span>12</span></p>
+                    <p class="card-text display-4"><span>{{panneauxDisponibles}}</span></p> {# Variable dynamique panneaux disponibles #}
                 </div>
             </div>
         </div>
@@ -25,7 +24,7 @@
             <div class="card text-white bg-success card-hover">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-check-circle"></i> Panneaux loués</h5>
-                    <p class="card-text display-4"><span>{{sales}}</span></p>
+                    <p class="card-text display-4"><span>{{ panneauxLoues }}</span></p>
                 </div>
             </div>
         </div>
@@ -33,15 +32,16 @@
             <div class="card text-white bg-warning card-hover">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-project-diagram"></i> Projets d'habillage</h5>
-                    <p class="card-text display-4"><span>{{customers}}</span></p>
+                    <p class="card-text display-4"><span>{{ servicesAutresQuePanneaux }}</span></p> {# Variable dynamique services #}
                 </div>
+                
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 mb-4">
             <div class="card text-white bg-danger card-hover">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-dollar-sign"></i> Revenus générés</h5>
-                    <p class="card-text display-4">{{revenue}}</p>
+                    <p class="card-text display-4">{{ revenue | number_format(2, '.', ',') }} Ar</p> {# Variable dynamique revenus #}
                 </div>
             </div>
         </div>
@@ -109,7 +109,6 @@
     
     <script> 
         var usersData = JSON.parse('{{ usersByMonth|json_encode|raw }}') || [];
-     
         var labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         var userCounts = Array(12).fill(0); 
      
@@ -166,9 +165,9 @@
         .animated-background {
             background: linear-gradient(270deg, #007bff, #00c6ff);
             background-size: 400% 400%;
-            animation: gradientBackground 15s ease infinite;
+            animation: gradientAnimation 8s ease infinite;
         }
-        @keyframes gradientBackground {
+        @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
