@@ -1,0 +1,100 @@
+/* Styles personnalisés pour la page Demande de Devis */
+body {
+    background-color: #f9f9f9; /* Un fond clair et propre */
+    font-family: 'Arial', sans-serif; /* Typographie simple et moderne */
+}
+
+/* Style pour le formulaire */
+form {
+    background-color: #fff; /* Fond blanc pour le formulaire */
+    border-radius: 8px; /* Bords arrondis */
+    padding: 20px; /* Espacement interne pour aérer */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Légère ombre pour donner du relief */
+}
+
+form label {
+    font-weight: bold;
+    color: #333;
+}
+
+form .form-control, form .form-select {
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Bords gris clair */
+}
+
+form .form-control:focus, form .form-select:focus {
+    border-color: #dc3545; /* Couleur rouge pour le focus (comme le bouton) */
+    box-shadow: none; /* Enlever l'ombre par défaut */
+}
+
+form button {
+    background-color: #366adb; /* Rouge du bouton envoyer */
+    border-color: #366adb;
+}
+
+form button:hover {
+    background-color: #30f72c; /* Changement de couleur au survol */
+    border-color: #30f72c;
+}
+
+/* Style pour les coordonnées à droite */
+.bg-light {
+    background-color: #f4f4f4 !important; /* Légèrement plus foncé que le fond général */
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 4px solid #dc3545; /* Ligne rouge verticale */
+}
+
+.bg-light h3 {
+    font-size: 1.5rem;
+    color: #dc3545; /* Couleur rouge pour le titre des coordonnées */
+}
+
+.bg-light a {
+    color: #dc3545;
+    text-decoration: none;
+}
+
+.bg-light a:hover {
+    text-decoration: underline;
+}
+
+/* Section de l'upload de fichiers */
+#fichiers {
+    border: 2px dashed #ccc; /* Bordure en pointillés pour le champ de fichiers */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+#fichiers:hover {
+    border-color: #dc3545; /* Bordure rouge au survol */
+}
+
+/* Check box */
+.form-check-input:checked {
+    background-color: #dc3545; /* Checkbox rouge */
+    border-color: #dc3545;
+}
+
+/* Boutons de contact */
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Responsive (petits écrans) */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+    .col-md-4 {
+        margin-top: 20px;
+    }
+}

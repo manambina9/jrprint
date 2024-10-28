@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande de Devis{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('css/form.css') }}">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="mb-4">Demande de Devis</h1>
+            <form method="post" action="" enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Votre nom" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="societe">Société (optionnel)</label>
+                        <input type="text" class="form-control" id="societe" name="societe" placeholder="Votre société">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="telephone">Téléphone (optionnel)</label>
+                        <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Votre téléphone">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="adresse">Adresse (optionnel)</label>
+                        <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Votre adresse">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="code_postal">Code postal (optionnel)</label>
+                        <input type="text" class="form-control" id="code_postal" name="code_postal" placeholder="Votre code postal">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="ville">Ville (optionnel)</label>
+                        <input type="text" class="form-control" id="ville" name="ville" placeholder="Votre ville">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="prestation">Type de prestation</label>
+                        <select class="form-select" id="prestation" name="prestation" required>
+                            <option value="" disabled selected>Choisir une prestation</option>
+                            <option value="panneau">Panneau publicitaire</option>
+                            <option value="habillage">Habillage véhicule</option>
+                            <option value="bache">Bâche publicitaire</option>
+                            <!-- Ajoutez d'autres options si nécessaire -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Détaillez votre projet ici..." required></textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="fichiers">Pièce(s) jointe(s) (optionnel)</label>
+                    <input type="file" class="form-control" id="fichiers" name="fichiers[]" multiple>
+                    <small class="form-text text-muted">Déposer un ou plusieurs fichiers ici ou cliquer pour télécharger (25Mo maximum)</small>
+                </div>
+                <div class="form-group form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="acceptation" required>
+                    <label class="form-check-label" for="acceptation">
+                    </label>
+                        En validant ce formulaire, je consens à l'utilisation des informations fournies par Jr_Print dans le cadre de la relation professionnelle qui pourrait en découler. Ces données ne seront ni revendues, ni exploitées à des fins commerciales. Conformément à la législation en vigueur, vous bénéficiez d'un droit d'accès, de modification et d'opposition en nous <a href="{{ path('contact') }}">contactant via ce lien.<a>
+                </div>
+                <button type="submit" class="btn btn-danger w-100">Envoyer</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
