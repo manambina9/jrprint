@@ -16,7 +16,7 @@
             <div class="card text-white bg-primary card-hover">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-ad"></i> Panneaux disponibles</h5>
-                    <p class="card-text display-4"><span>{{panneauxDisponibles}}</span></p> {# Variable dynamique panneaux disponibles #}
+                    <p class="card-text display-4"><span>{{ panneauxDisponibles }}</span></p> 
                 </div>
             </div>
         </div>
@@ -32,16 +32,15 @@
             <div class="card text-white bg-warning card-hover">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-project-diagram"></i> Projets d'habillage</h5>
-                    <p class="card-text display-4"><span>{{ servicesAutresQuePanneaux }}</span></p> {# Variable dynamique services #}
+                    <p class="card-text display-4"><span>{{ servicesAutresQuePanneaux }}</span></p>  
                 </div>
-                
             </div>
         </div>
         <div class="col-lg-3 col-sm-6 mb-4">
             <div class="card text-white bg-danger card-hover">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-dollar-sign"></i> Revenus générés</h5>
-                    <p class="card-text display-4">{{ revenue | number_format(2, '.', ',') }} Ar</p> {# Variable dynamique revenus #}
+                    <p class="card-text display-4">{{ revenue }} Ar</p> 
                 </div>
             </div>
         </div>
@@ -85,6 +84,73 @@
             </div>
         </div>
     </div>
+    <style>
+            /* Styles pour le conteneur du sélecteur */
+        .custom-select-container {
+            margin-bottom: 20px;
+        }
+
+        /* Styles pour le label */
+        .custom-select-container label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333; /* Couleur du texte */
+        }
+
+        /* Styles pour le sélecteur */
+        .custom-select {
+            appearance: none; /* Supprimer le style par défaut du sélecteur */
+            -webkit-appearance: none; /* Pour Safari */
+            -moz-appearance: none; /* Pour Firefox */
+            padding: 10px 20px; /* Espacement à l'intérieur */
+            border: 1px solid #ccc; /* Bordure */
+            border-radius: 5px; /* Coins arrondis */
+            background-color: #fff; /* Couleur de fond */
+            color: #333; /* Couleur du texte */
+            font-size: 16px; /* Taille de la police */
+            cursor: pointer; /* Curseur pointer */
+            transition: border-color 0.3s; /* Transition pour la bordure */
+        }
+
+        /* Changer la couleur de la bordure au survol */
+        .custom-select:hover {
+            border-color: #007bff; /* Couleur de la bordure au survol */
+        }
+
+        /* Ajouter une flèche personnalisée */
+        .custom-select::after {
+            content: '▼'; /* Flèche vers le bas */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none; /* Ignorer les événements de souris */
+        }
+
+    </style>
+    <div class="row mb-4 custom-select-container">
+        <div class="col-lg-6">
+            <label for="yearSelect">Sélectionnez une année :</label>
+            <select id="yearSelect" class="form-select custom-select" onchange="updateRevenueChart()">
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+                <!-- Ajoutez d'autres années si nécessaire -->
+            </select>
+        </div>
+    </div>
+    
+        
 
     <div class="row"> 
         <div class="col-lg-6 mb-4">
@@ -105,53 +171,180 @@
         </div>
     </div>
     
+
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <h5 class="card-title">Panneaux loués par mois</h5>
+            <canvas id="panelRentalsChart"></canvas>
+        </div>
+    </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <script> 
+        // Récupération des données
         var usersData = JSON.parse('{{ usersByMonth|json_encode|raw }}') || [];
+        var RevenuData = JSON.parse('{{revenueByMonth|json_encode|raw}}') || [];
+        var panelRentalsData = JSON.parse('{{ panneauxLouesByMonth|json_encode|raw }}') || [];
+        var selectedYear = 2024;
+
+        // Labels pour les mois
         var labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-        var userCounts = Array(12).fill(0); 
      
+        // Initialisation des données pour les utilisateurs et revenus
+        var userCounts = Array(12).fill(0);
+        var revenuCounts = Array(12).fill(0);
+        var panelRentalsCounts = Array(12).fill(0);
+
+        // Remplissage des données utilisateurs
         usersData.forEach(function(item) {
             userCounts[item.month - 1] = item.count;  
         });
-     
+
+        RevenuData.forEach(function(item) {
+            revenuCounts[item.month - 1] = item.total;
+        });
+
+        panelRentalsData.forEach(function(item) {
+            panelRentalsCounts[item.month - 1] = item.count;  
+        });
+
+        if (window.revenueChart) {
+            window.revenueChart.destroy();
+        }
+
+        function updateRevenueChart() {
+            selectedYear = parseInt(document.getElementById('yearSelect').value);
+        
+            // Récupérer les données pour l'année sélectionnée
+            var filteredRevenueData = RevenuData.filter(function(item) {
+                return item.year === selectedYear; // Supposons que `item.year` contienne l'année
+            });
+        
+            // Remplissage des données de revenus
+            revenuCounts.fill(0); // Réinitialiser les données
+            filteredRevenueData.forEach(function(item) {
+                revenuCounts[item.month - 1] = item.total;
+            });
+        
+            // Mettre à jour le graphique
+            revenueChart.data.datasets[0].data = revenuCounts;
+            revenueChart.update();
+        }
+
+        // Graphique des utilisateurs par mois
         var ctxUserPanel = document.getElementById('userPanelChart').getContext('2d');
         var userPanelChart = new Chart(ctxUserPanel, {
-            type: 'line',
-            data: {
-                labels: labels,  
-                datasets: [{
-                    label: 'Utilisateurs inscrits',
-                    data: userCounts,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: true
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Mois' 
-                        }
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Utilisateurs inscrits',
+                data: userCounts,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Mois'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Nombre d\'utilisateurs'
                     },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Nombre d\'utilisateurs' 
-                        },
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 10,  
-                            max: 50 
-                        }
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 10,
+                        max: 50
                     }
                 }
             }
-        });
+        }
+    });
+
+    // Graphique des revenus par mois
+    var ctxRevenuPanel = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctxRevenuPanel, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Revenus par mois  en Ariary',
+                data: revenuCounts,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Mois'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Revenus par mois'
+                    },
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 10,
+                        max: 50
+                    }
+                }
+            }
+        }
+    });
+
+
+    var ctxPanelRentals = document.getElementById('panelRentalsChart').getContext('2d');
+    var panelRentalsChart = new Chart(ctxPanelRentals, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Panneaux loués',
+                data: panelRentalsCounts,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Mois'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Nombre de panneaux loués'
+                    },
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
     </script>
 
     <style>

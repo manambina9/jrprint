@@ -6,8 +6,7 @@ namespace App\Repository;
 use App\Entity\Prestation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Statement;
+use Doctrine\DBAL\Connection; 
 
 class PrestationRepository extends ServiceEntityRepository
 {
@@ -28,5 +27,15 @@ class PrestationRepository extends ServiceEntityRepository
         // Exécutez la requête et récupérez le résultat
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
+
+    public function findByCategory(string $category): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.category = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult();
+    }
+    
     
 }

@@ -24,8 +24,7 @@ class FactureCrudController extends AbstractCrudController
             DateField::new('date', 'Date de facture'),
             AssociationField::new('client', 'Client'),
             AssociationField::new('prestations', 'Prestations')
-                ->setFormTypeOptions(['by_reference' => false])
-                ->onlyOnForms(),
+                ->setFormTypeOptions(['by_reference' => false]),
             MoneyField::new('montantTotal', 'Montant Total')
                 ->setCurrency('MGA')
                 ->onlyOnIndex(),

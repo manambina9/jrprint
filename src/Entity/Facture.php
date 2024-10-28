@@ -122,4 +122,5 @@ class Facture
         }
         $this->setMontantTotal($total);
     }
+
 }
