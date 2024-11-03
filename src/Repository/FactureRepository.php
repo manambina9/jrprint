@@ -1,5 +1,7 @@
 <?php
+
 // src/Repository/FactureRepository.php
+
 namespace App\Repository;
 
 use App\Entity\Facture;
@@ -18,12 +20,28 @@ class FactureRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT SUM(f.montant_total) AS total_revenus
-            FROM facture f
+            SELECT ROUND(SUM(f.montant_total) / 100, 2) AS total_revenus FROM facture f
         ';
 
         $stmt = $conn->executeQuery($sql);
 
         return (float) $stmt->fetchOne();
+    }
+
+    public function countRevenuByMonth(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+        SELECT YEAR(f.date) AS year, MONTH(f.date) AS month, ROUND(SUM(f.montant_total) / 100, 2) AS total
+        FROM facture f
+        GROUP BY year, month
+        ORDER BY year ASC, month ASC
+
+        ';
+
+        $stmt = $conn->executeQuery($sql);
+
+        return $stmt->fetchAllAssociative(); 
     }
 }

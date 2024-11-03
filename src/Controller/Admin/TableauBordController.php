@@ -1,6 +1,5 @@
 <?php
 
-// src/Controller/Admin/TableauBordController.php
 namespace App\Controller\Admin;
 
 use App\Entity\User;
@@ -13,6 +12,7 @@ use App\Repository\UserRepository;
 use App\Repository\CommandeRepository;
 use App\Repository\FactureRepository; 
 use App\Repository\PrestationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -21,46 +21,56 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class TableauBordController extends AbstractDashboardController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+    
     #[Route('/admin', name: 'admin')]
     public function dashboard(
         UserRepository $userRepository,
         CommandeRepository $commandeRepository,
         FactureRepository $factureRepository,
         PrestationRepository $prestationRepository
-    ): Response {
-        // Récupérer le nombre d'utilisateurs
-        $usersByMonth = $userRepository->countUsersByMonth();
+
         
-        // Récupérer le revenu total
-        $revenue = $factureRepository->getTotalRevenus();
+    ): Response { 
+        $usersByMonth = $userRepository->countUsersByMonth() ;
+        $revenueByMonth = $factureRepository->countRevenuByMonth();
 
+        $revenue = $factureRepository->getTotalRevenus();  
+        
         $totalUsers = $userRepository->countUsers();
-
-        // Récupérer le nombre de commandes (panneaux loués)
+ 
         $panneauxLoues = $commandeRepository->count([]);
-
-        // Récupérer les revenus générés (somme des factures)
+ 
         $revenusGeneres = $factureRepository->getTotalRevenus();
 
         $sales = $factureRepository->count([]);
 
         $panneauxDisponibles = $commandeRepository->countPanneauxDisponibles();
-        dump($panneauxDisponibles); // Déboguer pour vérifier la valeur ici
+        dump($panneauxDisponibles); 
 
-        $servicesAutresQuePanneaux = $prestationRepository->countServicesAutresQuePanneau();
+        $servicesAutresQuePanneaux = $prestationRepository->countServicesAutresQuePanneau(); 
 
-        // Récupérer le nombre total de clients
         $customers = $userRepository->count([]);
+
+        $panneauxLouesParMois = $commandeRepository->countPanneauxLouesParMois();
+        
         return $this->render('admin/dashboard.html.twig', [
             'panneauxLoues' => $panneauxLoues,
             'revenusGeneres' => $revenusGeneres,
             'totalUsers' => $totalUsers,
             'usersByMonth' => $usersByMonth,
+            'revenueByMonth' => $revenueByMonth,
             'sales' => $sales,
             'panneauxDisponibles' => $panneauxDisponibles,
             'customers' => $customers,
             'revenue' => $revenue,
             'servicesAutresQuePanneaux' => $servicesAutresQuePanneaux,
+            'panneauxLouesByMonth' => $panneauxLouesParMois,
         ]);
     }
 
