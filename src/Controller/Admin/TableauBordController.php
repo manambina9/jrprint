@@ -80,7 +80,7 @@ class TableauBordController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Promotions', 'fas fa-percent', Promotion::class);
         yield MenuItem::linkToCrud('Factures', 'fas fa-file-invoice', Facture::class);
         yield MenuItem::section('Mode');
-        yield MenuItem::linkToRoute('Passer en mode Client', 'fas fa-user-tie', 'app_user_page');
+        yield MenuItem::linkToRoute('Passer en mode Client', 'fas fa-user-tie', 'user');
         yield MenuItem::linkToRoute('Accueil du site', 'fas fa-globe', 'app_accueil');
     }
 }

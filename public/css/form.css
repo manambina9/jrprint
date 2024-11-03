@@ -1,100 +1,265 @@
-/* Styles personnalisés pour la page Demande de Devis */
 body {
-    background-color: #f9f9f9; /* Un fond clair et propre */
-    font-family: 'Arial', sans-serif; /* Typographie simple et moderne */
+    background: #f0f2f5;
+    min-height: 100vh;
+    padding: 2rem 0;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(128, 0, 128, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(0, 128, 0, 0.05) 0%, transparent 30%);
 }
 
-/* Style pour le formulaire */
-form {
-    background-color: #fff; /* Fond blanc pour le formulaire */
-    border-radius: 8px; /* Bords arrondis */
-    padding: 20px; /* Espacement interne pour aérer */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Légère ombre pour donner du relief */
+.container {
+    position: relative;
 }
 
-form label {
-    font-weight: bold;
+.card {
+    border: none;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Effet décoratif coin supérieur droit */
+/* Ajout d'une bande de couleur inspirée du logo */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, 
+        #800080, /* violet */
+        #0000FF, /* bleu */
+        #00FFFF, /* cyan */
+        #008000, /* vert */
+        #FFFF00  /* jaune */
+    );
+}
+/* Effet décoratif coin inférieur gauche */
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, 
+        rgba(0, 128, 0, 0.2),
+        rgba(255, 255, 0, 0.2)
+    );
+    border-radius: 50%;
+    filter: blur(15px);
+    z-index: 0;
+}
+
+.card-body {
+    padding: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Style du titre principal */
+h1 {
     color: #333;
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+    text-align: center;
+    background: linear-gradient(45deg, #800080, #0000FF, #00FFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
 }
 
-form .form-control, form .form-select {
-    border-radius: 5px;
-    border: 1px solid #ccc; /* Bords gris clair */
+/* Ligne décorative sous le titre */
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(to right, #800080, #00FFFF);
+    border-radius: 2px;
 }
 
-form .form-control:focus, form .form-select:focus {
-    border-color: #dc3545; /* Couleur rouge pour le focus (comme le bouton) */
-    box-shadow: none; /* Enlever l'ombre par défaut */
+/* Style des champs de formulaire */
+.form-control, .form-select {
+    border: 2px solid transparent;
+    border-radius: 15px;
+    padding: 1rem 1.2rem;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    font-size: 1rem;
 }
 
-form button {
-    background-color: #366adb; /* Rouge du bouton envoyer */
-    border-color: #366adb;
+.form-control:focus, .form-select:focus {
+    border-color: #00FFFF;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.1);
 }
 
-form button:hover {
-    background-color: #30f72c; /* Changement de couleur au survol */
-    border-color: #30f72c;
+/* Style des labels */
+label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.7rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-/* Style pour les coordonnées à droite */
-.bg-light {
-    background-color: #f4f4f4 !important; /* Légèrement plus foncé que le fond général */
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 20px;
-    border-left: 4px solid #dc3545; /* Ligne rouge verticale */
+/* Icône pour les champs requis */
+label .text-danger {
+    position: relative;
+    top: -2px;
 }
 
-.bg-light h3 {
-    font-size: 1.5rem;
-    color: #dc3545; /* Couleur rouge pour le titre des coordonnées */
+/* Style des boutons */
+.btn {
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.bg-light a {
-    color: #dc3545;
-    text-decoration: none;
-}
-
-.bg-light a:hover {
-    text-decoration: underline;
-}
-
-/* Section de l'upload de fichiers */
-#fichiers {
-    border: 2px dashed #ccc; /* Bordure en pointillés pour le champ de fichiers */
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #fff;
-}
-
-#fichiers:hover {
-    border-color: #dc3545; /* Bordure rouge au survol */
-}
-
-/* Check box */
-.form-check-input:checked {
-    background-color: #dc3545; /* Checkbox rouge */
-    border-color: #dc3545;
-}
-
-/* Boutons de contact */
-.btn-outline-danger {
-    border-color: #dc3545;
-    color: #dc3545;
-}
-
-.btn-outline-danger:hover {
-    background-color: #dc3545;
+.btn-danger, .btn-primary {
+    background: linear-gradient(45deg, 
+        #800080,
+        #0000FF,
+        #00FFFF
+    );
+    background-size: 200% 200%;
+    animation: gradient 5s ease infinite;
     color: white;
+    border: none;
 }
 
-/* Responsive (petits écrans) */
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation du gradient */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Style de la checkbox */
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.form-check-input:checked {
+    background-color: #0000FF;
+    border-color: #0000FF;
+    animation: checkmark 0.2s ease-in-out;
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Style pour les fichiers joints */
+.form-control[type="file"] {
+    padding: 0.8rem;
+    cursor: pointer;
+}
+
+.form-text {
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* Style de la seconde card */
+.card + .card {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.98));
+}
+
+.card + .card .card-body {
+    padding: 2.5rem;
+    text-align: center;
+}
+
+.card + .card h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #800080, #0000FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Effets de hover sur les cards */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.1),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
-    .row {
-        flex-direction: column;
+    .card-body {
+        padding: 2rem;
     }
-    .col-md-4 {
-        margin-top: 20px;
+
+    h1 {
+        font-size: 2rem;
     }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+/* Animation loading pour le bouton submit */
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Style pour les groupes de form-control */
+.row {
+    margin-bottom: 1.5rem;
+}
+
+/* Effet de focus global */
+*:focus {
+    outline: none;
 }
