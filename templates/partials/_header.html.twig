@@ -33,13 +33,10 @@
             <a class="nav-link {% if app.request.attributes.get('_route') == 'Avantages' %}text-primary{% else %}text-dark{% endif %}" href="{{ path('Avantages') }}">Vos avantages</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if app.request.attributes.get('_route') == 'contact' %}text-primary{% else %}text-dark{% endif %}" href="{{ path('contact') }}">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-connect" href="{{ path('app_login') }}">Se Connecter</a>
-          </li>
-          <li class="nav-item">
             <a class="btn btn-connect" href="{{ path('formulaire_prestation') }}">Demande de Devis</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-connect" href="{{ path('contact') }}">Nous Contacter</a>
           </li>
         </ul>
       </div>
