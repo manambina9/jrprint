@@ -16,7 +16,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,7 +23,7 @@ class PrestationCrudController extends AbstractCrudController
 {
     private PrestationRepository $prestationRepository;
 
-    // Injecter le repository via le constructeur
+    // Injection du repository via le constructeur
     public function __construct(PrestationRepository $prestationRepository)
     {
         $this->prestationRepository = $prestationRepository;
@@ -37,33 +36,60 @@ class PrestationCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $categoryChoices = [
+            'Panneau' => 'Panneau',
+            'Autres Services' => 'Autres Services',
+        ];
+
+        $panneauTitles = [
+            'Panneau sucette – Format 2*1',
+            'Panneau – Format 4x3',
+            'Panneau – Format 8x3',
+            'Panneau – Format 12x3',
+            'Panneau – Format 9x3',
+            'Panneau – Format 6x3',
+        ];
+
+        $autresServicesTitles = [
+            'Habillages cuves & Transtack',
+            'Décorations évènementielles',
+            'Silhouettes',
+            'Habillage véhicules',
+            'Décorations Plaque sur PVC',
+            'Photobooth',
+            'Habillages vitrines / Vitrophanie',
+            'Branding 3',
+            'Photocall',
+            'Bâche tendue',
+            'Stop trottoir',
+            'Habillages comptoirs',
+            'Totem',
+            'Habillages boutiques',
+        ];
+
+        $categoryField = ChoiceField::new('category', 'Catégorie')
+            ->setChoices($categoryChoices)
+            ->setRequired(true);
+
+        $titleField = ChoiceField::new('title', 'Titre')
+            ->setChoices(array_combine($panneauTitles, $panneauTitles) + array_combine($autresServicesTitles, $autresServicesTitles))
+            ->setRequired(true);
+        
+
         return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('title', 'Titre'),
-            TextEditorField::new('description', 'Description'),
-            MoneyField::new('price', 'Prix')->setCurrency('MGA'),
-            ChoiceField::new('category', 'Catégorie')
-                ->setChoices([
-                    'Panneau 12*3' => 'Panneau 12*3',
-                    'Panneau 8*3' => 'Panneau 8*3',
-                    'Panneau 6*3' => 'Panneau 6*3',
-                    'Panneau 4*3' => 'Panneau 4*3',
-                    'Habillage véhicules' => 'Habillage véhicules',
-                    'Photobooth' => 'Photobooth',
-                    'Bâches tendue' => 'Bâches tendue',
-                    // Ajoutez d'autres catégories si nécessaire
-                ]),
+            IdField::new('id')->hideOnForm()->hideOnIndex(),
+            $categoryField,
+            $titleField,
+            TextEditorField::new('description', 'Description')->setRequired(true),
+            MoneyField::new('price', 'Prix')->setCurrency('MGA')->setRequired(true),
+            TextField::new('location', 'Localisation')->setHelp('Obligatoire pour les panneaux'),
             BooleanField::new('available', 'Disponible'),
-            TextField::new('imageFile', 'Nouvelle Image')
-                ->setFormType(VichImageType::class)
-                ->onlyOnForms(),
-            ImageField::new('imageUrl', 'Image')
-                ->setBasePath('/images/prestations')
-                ->onlyOnIndex(),
+            TextField::new('imageFile', 'Nouvelle Image')->setFormType(VichImageType::class)->onlyOnForms(),
+            ImageField::new('imageUrl', 'Image')->setBasePath('/images/prestations')->onlyOnIndex(),
             IntegerField::new('quantityAvailable', 'Qt disponible'),
             DateTimeField::new('createdAt', 'Créé le')->hideOnForm(),
-            DateTimeField::new('updatedAt', 'Mis à jour le')->hideOnForm(),
-            AssociationField::new('promotions', 'Promotions')->hideOnIndex(),
+            DateTimeField::new('updatedAt', 'Mis à jour le')->hideOnIndex(),
+            AssociationField::new('promotions', 'Promotions')->setRequired(false),
         ];
     }
 

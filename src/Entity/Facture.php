@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
@@ -38,7 +38,7 @@ class Facture
         $this->prestations = new ArrayCollection();
     }
 
-    // Getters et setters...
+    // Getters et Setters
 
     public function getId(): ?int
     {
@@ -50,10 +50,9 @@ class Facture
         return $this->numero;
     }
 
-    public function setNumero(string $numero): static
+    public function setNumero(string $numero): self
     {
         $this->numero = $numero;
-
         return $this;
     }
 
@@ -62,10 +61,9 @@ class Facture
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
         return $this;
     }
 
@@ -74,10 +72,9 @@ class Facture
         return $this->client;
     }
 
-    public function setClient(?User $client): static
+    public function setClient(?User $client): self
     {
         $this->client = $client;
-
         return $this;
     }
 
@@ -86,19 +83,20 @@ class Facture
         return $this->prestations;
     }
 
-    public function addPrestation(Prestation $prestation): static
+    public function addPrestation(Prestation $prestation): self
     {
         if (!$this->prestations->contains($prestation)) {
             $this->prestations[] = $prestation;
+            $this->calculerMontantTotal();  // Mettre à jour le montant total
         }
-
         return $this;
     }
 
-    public function removePrestation(Prestation $prestation): static
+    public function removePrestation(Prestation $prestation): self
     {
-        $this->prestations->removeElement($prestation);
-
+        if ($this->prestations->removeElement($prestation)) {
+            $this->calculerMontantTotal();  // Mettre à jour le montant total
+        }
         return $this;
     }
 
@@ -107,20 +105,12 @@ class Facture
         return $this->montantTotal;
     }
 
-    public function setMontantTotal(float $montantTotal): static
-    {
-        $this->montantTotal = $montantTotal;
-
-        return $this;
-    }
-
     public function calculerMontantTotal(): void
     {
         $total = 0;
         foreach ($this->prestations as $prestation) {
             $total += $prestation->getPrice();
         }
-        $this->setMontantTotal($total);
+        $this->montantTotal = $total;
     }
-
 }

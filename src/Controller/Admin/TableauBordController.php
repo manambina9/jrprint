@@ -34,31 +34,20 @@ class TableauBordController extends AbstractDashboardController
         CommandeRepository $commandeRepository,
         FactureRepository $factureRepository,
         PrestationRepository $prestationRepository
+    ): Response {
 
-        
-    ): Response { 
         $usersByMonth = $userRepository->countUsersByMonth() ;
         $revenueByMonth = $factureRepository->countRevenuByMonth();
-
         $revenue = $factureRepository->getTotalRevenus();  
-        
-        $totalUsers = $userRepository->countUsers();
- 
+        $totalUsers = $userRepository->countUsers(); 
         $panneauxLoues = $commandeRepository->count([]);
- 
         $revenusGeneres = $factureRepository->getTotalRevenus();
-
         $sales = $factureRepository->count([]);
-
         $panneauxDisponibles = $commandeRepository->countPanneauxDisponibles();
         dump($panneauxDisponibles); 
-
         $servicesAutresQuePanneaux = $prestationRepository->countServicesAutresQuePanneau(); 
-
         $customers = $userRepository->count([]);
-
         $panneauxLouesParMois = $commandeRepository->countPanneauxLouesParMois();
-        
         return $this->render('admin/dashboard.html.twig', [
             'panneauxLoues' => $panneauxLoues,
             'revenusGeneres' => $revenusGeneres,

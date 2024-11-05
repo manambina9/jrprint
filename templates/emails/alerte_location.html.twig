@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333333;
+        }
+        p {
+            color: #666666;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Alerte de Location</h1>
+        <p>Bonjour,</p>
+        <p>Nous vous informons que la date de fin de location de votre commande <strong>{{ commande.id }}</strong> approche.</p>
+        <p>Voici les détails :</p>
+        <ul>
+            <li>Date de début : {{ commande.dateDebutLocation|date('d-m-Y H:i') }}</li>
+            <li>Date de fin : {{ commande.dateFinLocation|date('d-m-Y H:i') }}</li>
+            <li>Montant : {{ commande.montantTotal }} MGA</li>
+        </ul>
+        <p>Nous vous recommandons de prendre les dispositions nécessaires.</p>
+        <p>Cordialement,<br>L'équipe de Jr_print</p>
+        <div class="footer">
+            <p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>
+        </div>
+    </div>
+</body>
+</html>
