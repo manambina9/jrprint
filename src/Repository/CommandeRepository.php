@@ -37,7 +37,7 @@ class CommandeRepository extends ServiceEntityRepository
         $sql = 'SELECT COUNT(*) FROM prestation WHERE available = 1';
         $stmt = $conn->executeQuery($sql);
         
-        return (int) $stmt->fetchOne(); // Retourne le résultat comme un entier
+        return (int) $stmt->fetchOne();
     }
 
     public function countPanneauxLouesParMois(string $statut = 'livrée'): array
@@ -89,4 +89,28 @@ class CommandeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+
+    public function countServicesAutresQuePanneau(): int
+    {
+        return (int) $this->createQueryBuilder('c')
+            ->select('COUNT(p.id)')
+            ->join('c.prestations', 'p')
+            ->where('p.category != :category')
+            ->setParameter('category', 'Panneau')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countPanneauxLoue(): int
+    {
+        return (int) $this->createQueryBuilder('c')
+            ->select('COUNT(p.id)')
+            ->join('c.prestations', 'p')
+            ->where('p.category = :category')
+            ->setParameter('category', 'Panneau')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }  
+    
 }

@@ -14,19 +14,7 @@ class PrestationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Prestation::class);
     }
-
-    public function countServicesAutresQuePanneau(): int
-    {
-        $qb = $this->createQueryBuilder('p');
-        
-        // Utilisez le QueryBuilder pour construire votre requête
-        $qb->select('COUNT(p.id)')
-            ->where('p.category != :categoryPanneau')
-            ->setParameter('categoryPanneau', 'panneau');
-    
-        // Exécutez la requête et récupérez le résultat
-        return (int) $qb->getQuery()->getSingleScalarResult();
-    }
+  
 
     public function findByCategory(string $category): array
     {

@@ -32,24 +32,23 @@ class TableauBordController extends AbstractDashboardController
     public function dashboard(
         UserRepository $userRepository,
         CommandeRepository $commandeRepository,
-        FactureRepository $factureRepository,
-        PrestationRepository $prestationRepository
+        FactureRepository $factureRepository
     ): Response {
 
         $usersByMonth = $userRepository->countUsersByMonth() ;
         $revenueByMonth = $factureRepository->countRevenuByMonth();
         $revenue = $factureRepository->getTotalRevenus();  
-        $totalUsers = $userRepository->countUsers(); 
-        $panneauxLoues = $commandeRepository->count([]);
+        $totalUsers = $userRepository->countUsers();
         $revenusGeneres = $factureRepository->getTotalRevenus();
         $sales = $factureRepository->count([]);
         $panneauxDisponibles = $commandeRepository->countPanneauxDisponibles();
         dump($panneauxDisponibles); 
-        $servicesAutresQuePanneaux = $prestationRepository->countServicesAutresQuePanneau(); 
+        $nombreServicesAutresQuePanneau = $commandeRepository->countServicesAutresQuePanneau();
+        $nombreServicesPanneau = $commandeRepository->countPanneauxLoue();
+ 
         $customers = $userRepository->count([]);
         $panneauxLouesParMois = $commandeRepository->countPanneauxLouesParMois();
         return $this->render('admin/dashboard.html.twig', [
-            'panneauxLoues' => $panneauxLoues,
             'revenusGeneres' => $revenusGeneres,
             'totalUsers' => $totalUsers,
             'usersByMonth' => $usersByMonth,
@@ -58,7 +57,8 @@ class TableauBordController extends AbstractDashboardController
             'panneauxDisponibles' => $panneauxDisponibles,
             'customers' => $customers,
             'revenue' => $revenue,
-            'servicesAutresQuePanneaux' => $servicesAutresQuePanneaux,
+            'nombre_services_autres_que_panneau' => $nombreServicesAutresQuePanneau,
+            'nombrePanneauLoue' => $nombreServicesPanneau,
             'panneauxLouesByMonth' => $panneauxLouesParMois,
         ]);
     }
