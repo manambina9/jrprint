@@ -8,9 +8,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Statement;
-
 
 
 /**
@@ -39,6 +36,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $stmt->fetchAllAssociative(); 
     }
     
+    public function countUsers(): int
+    {
+        return $this->count([]);
+    }
     
 
     

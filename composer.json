@@ -7,10 +7,12 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "beberlei/doctrineextensions": "^1.5",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.1",
+        "dompdf/dompdf": "^3.0",
         "easycorp/easyadmin-bundle": "^4.12",
         "friendsofsymfony/ckeditor-bundle": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.4",
@@ -47,7 +49,8 @@
         "symfony/yaml": "7.0.*",
         "symfonycasts/reset-password-bundle": "^1.22",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "vich/uploader-bundle": "^2.4"
     },
     "config": {
         "allow-plugins": {

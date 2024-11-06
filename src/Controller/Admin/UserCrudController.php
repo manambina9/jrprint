@@ -7,7 +7,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\PasswordField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
@@ -31,6 +30,7 @@ class UserCrudController extends AbstractCrudController
                 ])
                 ->allowMultipleChoices(),
             DateTimeField::new('createdAt')->setFormat('dd/MM/yyyy HH:mm')->hideOnForm(),
+            TextField::new('password'),
         ];
     }
-}
+} 
