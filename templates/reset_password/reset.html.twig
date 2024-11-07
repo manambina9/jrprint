@@ -1,60 +1,112 @@
 {% extends 'base.html.twig' %}
 
-
 {% block title %}Réinitialiser votre mot de passe{% endblock %}
 
 {% block body %}
 
 <style>
-/* assets/css/main.css */
-.form-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
+    /* assets/css/main.css */
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
 
-.form-title {
-    text-align: center;
-    margin-bottom: 20px;
-}
+    .form-title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+    }
 
-.form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
+    .form-group {
+        display: flex;
+        flex-direction: column; /* Changer pour vertical */
+        margin-bottom: 15px;
+    }
 
-.form-group label {
-    width: 150px; /* Adjust as needed */
-    margin-right: 10px; /* Small tabulation */
-}
+    .form-group label {
+        margin-bottom: 5px; /* Espacement entre le label et l'input */
+        font-weight: bold;
+        color: #555;
+    }
 
-.form-group input {
-    flex: 1;
-}
+    .form-group input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s; /* Transition pour le focus */
+    }
 
-.btn-primary {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 16px;
-}
+    .form-group input:focus {
+        border-color: #007bff; /* Couleur de la bordure au focus */
+        outline: none; /* Retire le contour par défaut */
+    }
 
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer; /* Curseur pointeur */
+        transition: background-color 0.3s; /* Transition pour le hover */
+    }
 
+    .btn-primary:hover {
+        background-color: #0056b3; /* Couleur au hover */
+    }
+
+    .alert {
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
 </style>
-    <div class="form-container">
-        <h1 class="form-title">Réinitialiser votre mot de passe</h1>
 
-        {{ form_start(resetForm) }}
-            {{ form_row(resetForm.plainPassword.first, {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_row(resetForm.plainPassword.second, {'label_attr': {'class': 'form-label'}}) }}
-            <button class="btn btn-primary">Réinitialiser le mot de passe</button>
-        {{ form_end(resetForm) }}
-    </div>
+<div class="form-container">
+    <h1 class="form-title">Réinitialiser votre mot de passe</h1>
+
+    {# Affichage des messages flash #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-error">{{ message }}</div>
+    {% endfor %}
+
+    {{ form_start(resetForm) }}
+        <div class="form-group">
+            {{ form_label(resetForm.plainPassword.first, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(resetForm.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Nouveau mot de passe', 'aria-label': 'Nouveau mot de passe'}}) }}
+            {{ form_errors(resetForm.plainPassword.first) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(resetForm.plainPassword.second, null, {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(resetForm.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirmer le mot de passe', 'aria-label': 'Confirmer le mot de passe'}}) }}
+            {{ form_errors(resetForm.plainPassword.second) }}
+        </div>
+        <button class="btn btn-primary">Réinitialiser le mot de passe</button>
+    {{ form_end(resetForm) }}
+</div>
+
 {% endblock %}

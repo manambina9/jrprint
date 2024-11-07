@@ -133,129 +133,6 @@ footer .social-icons a {
     margin-right: 15px; 
 }
 
-.card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    width: 310px;
-    height: 200px;
-    perspective: 1000px;
-    position: relative;
-    margin: 20px; /* Espace entre les cartes */
-    transform: scale(1); /* Échelle de base */
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .card:hover {
-    transform: scale(1.05); /* Agrandissement au survol */
-  }
-  
-  .side {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-    border-radius: 10px;
-    overflow: hidden; /* Pour assurer que rien ne dépasse */
-  }
-  
-  .side--front {
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
-  }
-  
-  .side--back {
-    background-color: #565478;
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Correspondre à l'ombre de la face avant */
-  }
-  
-  .card:hover .side--front {
-    transform: rotateY(-180deg);
-  }
-  
-  .card:hover .side--back {
-    transform: rotateY(0deg);
-  }
-  
-  .title {
-    margin: 0;
-    padding: 0;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .title img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    transition: transform 0.3s ease; /* Animation douce pour l'image */
-  }
-  
-  .card:hover .title img {
-    transform: scale(1.1); /* Légère augmentation de l'image au survol */
-  }
-  
-  .icon-text {
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    padding: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ajout d'une ombre subtile au texte */
-  }
-  
-  .btn-discover {
-    margin-top: 20px;
-    display: inline-block;
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 24px;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    outline: none;
-  }
-  
-  .btn-discover:hover {
-    background-color: #45a049;
-    color: rgb(255, 255, 255);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .btn-discover:active {
-    background-color: #3e8e41;
-    transform: translateY(1px);
-  }
-  
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
   .section {
     background-color: #f9f9f9;
     padding: 50px 0;
@@ -315,6 +192,52 @@ footer .social-icons a {
   @media (min-width: 768px) {
     .testimonial {
       margin: 10px 20px;
+    }
+  }
+  
+  
+  .stats-counter {
+    padding: 60px 0;
+  }
+  
+  .stats-counter .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .stats-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .stats-item .purecounter {
+    font-size: 40px;
+    color: #24a08b; /* Couleur verte pour les chiffres */
+    font-weight: bold;
+  }
+  
+  .stats-item p {
+    font-size: 25px;
+    margin-left: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .row {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .col-lg-6 {
+      width: 100%;
+    }
+  
+    .stats-item p {
+      font-size: 22px;
+    }
+  
+    .stats-item .purecounter {
+      font-size: 36px;
     }
   }
   

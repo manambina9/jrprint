@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\PrestationRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PrestationRepository::class)]
 class Prestation
@@ -15,19 +14,27 @@ class Prestation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    private ?string $title = null;
+    private ?string $name = null;
 
     #[ORM\Column(type: 'text')]
-    #[Assert\NotBlank]
     private ?string $description = null;
 
+    #[ORM\Column(type: 'json')]
+    private ?array $advantages = []; // Modification pour autoriser null
+
+    #[ORM\Column(type: 'json')]
+    private ?array $characteristics = []; // Modification pour autoriser null
+
+    #[ORM\Column(type: 'json')]
+    private ?array $images3d = []; // Modification pour autoriser null
+
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
-    #[Assert\NotNull]
-    private ?float $price = null;
+    private ?string $price = null;
+
+    #[ORM\Column(type: 'json')]
+    private ?array $locations = []; // Modification pour autoriser null
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
     private ?string $category = null;
 
     public function getId(): ?int
@@ -35,15 +42,14 @@ class Prestation
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): static
+    public function setName(string $name): static
     {
-        $this->title = $title;
-
+        $this->name = $name;
         return $this;
     }
 
@@ -55,19 +61,50 @@ class Prestation
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getAdvantages(): ?array // Modification pour renvoyer null
     {
-        return $this->price;
+        return $this->advantages;
     }
 
-    public function setPrice(float $price): static
+    public function setAdvantages(?array $advantages): static
     {
-        $this->price = $price;
+        $this->advantages = $advantages ?? []; // Assigne un tableau vide si null
+        return $this;
+    }
 
+    public function getCharacteristics(): ?array // Modification pour renvoyer null
+    {
+        return $this->characteristics;
+    }
+
+    public function setCharacteristics(?array $characteristics): static
+    {
+        $this->characteristics = $characteristics ?? []; // Assigne un tableau vide si null
+        return $this;
+    }
+
+    public function getImages3d(): ?array // Modification pour renvoyer null
+    {
+        return $this->images3d;
+    }
+
+    public function setImages3d(?array $images3d): static
+    {
+        $this->images3d = $images3d ?? []; // Assigne un tableau vide si null
+        return $this;
+    }
+
+    public function getLocations(): ?array // Modification pour renvoyer null
+    {
+        return $this->locations;
+    }
+
+    public function setLocations(?array $locations): static
+    {
+        $this->locations = $locations ?? []; // Assigne un tableau vide si null
         return $this;
     }
 
@@ -79,7 +116,6 @@ class Prestation
     public function setCategory(string $category): static
     {
         $this->category = $category;
-
         return $this;
     }
 }

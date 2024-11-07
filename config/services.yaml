@@ -7,6 +7,14 @@ parameters:
 
 services:
     # default configuration for services in *this* file
+    App\Services\CommandeService:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $pdfGenerator: '@App\Service\PdfGenerator'
+            $invoiceMailer: '@App\Service\InvoiceMailer'
+    App\Command\AlerteCommandeCommand:
+        tags: ['console.command']
+
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
@@ -19,6 +27,11 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    # Laissez Symfony gérer les contrôleurs automatiquement
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

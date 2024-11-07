@@ -1,41 +1,157 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
-
 {% block body %}
-    <h1>User index</h1>
+<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+<script src="{{ asset('js/dashboard.js') }}"></script>
+<link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
+<link href="{{ asset('vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('vendor/aos/aos.js') }}"></script>
+<script src="{{ asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Entreprise</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.entreprise }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="flex min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+    {# Sidebar gauche #}
+    <div class="w-64 bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
+        <div class="p-4 bg-blue-600 text-white">
+            <h3 class="text-xl font-bold">Prestations</h3>
+            <p class="text-sm text-blue-100 mt-1">Découvrez nos services</p>
+        </div>
+        <nav class="p-2">
+            <ul class="space-y-1">
+                {% for category in categories %}
+                    <li class="category-item rounded-lg transition-all duration-300 cursor-pointer
+                        {% if category.active %}bg-blue-50 text-blue-600 shadow-sm transform scale-102{% endif %}"
+                        data-category-id="{{ category.id }}">
+                        <a href="#" class="flex items-center justify-between p-3">
+                            <div>
+                                <span class="font-medium">{{ category.name }}</span>
+                                <span class="text-xs block opacity-60">{{ category.count }} articles</span>
+                            </div>
+                            <i class="fas fa-chevron-right transition-transform duration-300"></i>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+
+    {# Contenu principal #}
+    <div class="flex-1 p-8 overflow-y-auto">
+        <div class="bg-white p-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl">
+            <div class="space-y-6">
+                {% for section in ['Description', 'Aperçu', 'Avantages'] %}
+                    <div class="section-container" data-section="{{ section }}">
+                        <button class="w-full flex items-center justify-between p-2 hover:bg-gray-50 rounded-lg transition-colors duration-300">
+                            <h3 class="text-lg font-bold">{{ section }}</h3>
+                            <i class="fas fa-plus text-gray-400"></i>
+                        </button>
+                        <div class="section-content hidden mt-4">
+                            {% if section == 'Description' %}
+                                <p class="text-gray-600">{{ prestation.description }}</p>
+                            {% elseif section == 'Aperçu' %}
+                                <div class="relative h-64 bg-gray-100 rounded-lg overflow-hidden">
+                                    <img src="{{ asset('images/WhatsApp Image 2023-01-31 at 16.16.19.jpeg') }}" alt="Aperçu prestation" class="object-cover w-full h-full">
+                                </div>
+                            {% else %}
+                                <ul class="space-y-2">
+                                    {% for advantage in prestation.advantages %}
+                                        <li class="flex items-center gap-2 text-blue-700 transition-all duration-300 hover:translate-x-2">
+                                            <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                            {{ advantage }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <button class="add-to-cart w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-all duration-300">
+                    <i class="fas fa-shopping-cart mr-2"></i>
+                    Ajoutez au panier
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {# Sidebar droite #}
+    <div class="w-80 bg-white shadow-lg p-6">
+        {# Visualisation 3D #}
+        <div class="mb-8">
+            <h3 class="text-lg font-bold mb-4">Visualisation 3D</h3>
+            <div class="relative h-48 bg-gray-100 rounded-lg overflow-hidden group">
+                {% for image in prestation.images3d %}
+                    <div class="3d-image absolute inset-0 transition-all duration-500 transform {% if loop.first %}opacity-100{% else %}opacity-0{% endif %}"
+                         data-index="{{ loop.index0 }}">
+                        <img src="{{ asset(image) }}" alt="Vue 3D {{ loop.index }}" class="object-cover w-full h-full">
+                        <div class="absolute bottom-2 right-2 bg-white px-2 py-1 rounded-full text-sm">
+                            Vue {{ loop.index }}/{{ prestation.images3d|length }}
+                        </div>
+                    </div>
+                {% endfor %}
+                
+                <button class="prev-image absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow-lg opacity-0 group-hover:opacity-100">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="next-image absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow-lg opacity-0 group-hover:opacity-100">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        {# Caractéristiques #}
+        <div class="space-y-6">
+            <div class="p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-gray-100">
+                <h3 class="font-bold mb-3">Caractéristiques:</h3>
+                <ul class="space-y-2">
+                    {% for characteristic in prestation.characteristics %}
+                        <li class="flex items-center gap-2 text-gray-600">
+                            <div class="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+                            {{ characteristic }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {# Disponibilité #}
+            <div>
+                <h3 class="font-bold mb-3">Disponibilité:</h3>
+                <select class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    {% for location in prestation.locations %}
+                        <option value="{{ location }}">{{ location }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    {# Chat widget #}
+    <div class="chat-widget fixed bottom-4 right-4 w-80 bg-white shadow-xl rounded-lg transform translate-y-[calc(100%-3rem)]">
+        <div class="p-4 bg-blue-600 text-white rounded-t-lg cursor-pointer flex items-center justify-between">
+            <h4 class="font-semibold">
+                <i class="fas fa-comment-alt mr-2"></i>
+                Chat avec l'administration
+            </h4>
+            <i class="fas fa-chevron-right transform transition-transform duration-300"></i>
+        </div>
+        
+        <div class="chat-content hidden p-4">
+            <div class="h-64 overflow-y-auto mb-4 bg-gray-50 rounded-lg p-4 messages-container">
+                {# Les messages seront injectés ici via JavaScript #}
+            </div>
+            <div class="flex gap-2">
+                <input type="text" 
+                       class="message-input flex-1 p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                       placeholder="Votre message...">
+                <button class="send-message p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

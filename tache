@@ -1,0 +1,81 @@
+dev1 : Admin : page (CRUD PRODUIT / CRUD USER / CRUD ACCOUNT ) 
+
+CRUD PRODUIT :
+
+Gestion des catégories de produits
+Ajout, modification, suppression et consultation des produits
+Gestion des images et descriptions des produits
+CRUD USER :
+
+Gestion des rôles et permissions des utilisateurs
+Consultation des utilisateurs inscrits
+Réinitialisation des mots de passe et gestion des accès
+CRUD ACCOUNT :
+
+Gestion des paramètres du compte de l'entreprise
+Consultation des rapports d'activités des utilisateurs/admins
+Gestion des notifications et messages
+
+Gestion des Commandes :
+
+Visualiser et gérer les commandes effectuées par les utilisateurs.
+Suivi de l'état des commandes (en cours, livrée, annulée).
+Génération de factures et rapports de vente.
+
+Statistiques et Rapports :
+
+Générer des rapports d'activité, de ventes, d'utilisateurs actifs, etc.
+Suivi des panneaux publicitaires les plus loués.
+Visualisation de l'occupation des panneaux dans le temps.
+
+Gestion des Promotions :
+
+Créer et gérer des promotions, réductions, ou codes promo.
+Suivi de l'utilisation des promotions par les utilisateurs.
+
+Notifications :
+
+Envoyer des notifications ou des newsletters aux utilisateurs.
+Suivi des notifications envoyées (par email, SMS, etc.).
+
+Support Client :
+
+Gestion des demandes et réclamations des utilisateurs.
+Historique des échanges avec les utilisateurs.
+
+ 
+dev2 : User  : Page (commande , profil(modif_user) , 
+Page de Commande :
+
+Sélection et ajout de produits au panier
+Gestion des paiements et des options de livraison
+Historique des commandes
+Profil (modification utilisateur) :
+
+Modification des informations de l'utilisateur (nom, adresse, email)
+Gestion des préférences de communication
+Changements de mot de passe
+
+Suivi des Commandes :
+
+L'utilisateur doit pouvoir suivre l'état de ses commandes (en cours, livrée, annulée).
+Consultation des factures.
+
+Historique des Locations :
+
+Affichage de l'historique des panneaux loués.
+Répétition ou renouvellement d'une ancienne commande.
+
+Gestion des Réclamations :
+
+Permettre à l'utilisateur de soumettre des réclamations ou des questions via son compte.
+Suivi des réclamations.
+
+Notifications Personnalisées :
+
+Notifications sur l'état de commande, promotions disponibles ou actualités importantes.
+Gestion des préférences de notification (email, SMS, etc.).
+
+Support en Direct (Chat ou FAQ)[facultatif] :
+
+Intégration d'un système de support client ou d'une FAQ pour aider les utilisateurs à résoudre leurs problèmes. 

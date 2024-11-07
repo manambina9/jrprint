@@ -1,0 +1,165 @@
+body {
+    background-color: #ffffff;
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.card {
+    border: none;
+    border-radius: 20px;
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ajout d'une bande de couleur inspirée du logo */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, 
+        #800080, /* violet */
+        #0000FF, /* bleu */
+        #00FFFF, /* cyan */
+        #008000, /* vert */
+        #FFFF00  /* jaune */
+    );
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 2.5rem;
+}
+
+/* Style pour le titre principal inspiré de la typographie du logo */
+h1 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, 
+        #800080,
+        #0000FF,
+        #00FFFF,
+        #008000,
+        #FFFF00
+    );
+    border-radius: 2px;
+}
+
+/* Style pour les champs de formulaire */
+.form-control, .form-select {
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e9ecef;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #00FFFF;
+    background-color: white;
+    box-shadow: 0 0 0 0.25rem rgba(0, 255, 255, 0.1);
+}
+
+/* Style personnalisé pour les boutons */
+.btn {
+    padding: 0.8rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, 
+        #800080,
+        #0000FF
+    );
+    border: none;
+    color: white;
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, 
+        #0000FF,
+        #00FFFF
+    );
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Style pour les labels */
+label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style pour la seconde card */
+.card + .card {
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+/* Style pour la checkbox */
+.form-check-input:checked {
+    background-color: #0000FF;
+    border-color: #0000FF;
+}
+
+/* Personnalisation des messages d'erreur */
+.text-danger {
+    color: #800080 !important;
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Animation spéciale pour les boutons au survol */
+.btn:hover {
+    background-size: 200% 200%;
+    animation: rainbow 2s ease-in-out infinite;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

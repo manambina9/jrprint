@@ -1,0 +1,463 @@
+/* Layout principal */
+.flex {
+    display: flex;
+}
+
+.min-h-screen {
+    min-height: 100vh;
+}
+
+.bg-gradient-to-br {
+    background: linear-gradient(to bottom right, #F0F7FF, #F3F4F6);
+}
+
+/* Sidebar gauche */
+.w-64 {
+    width: 16rem;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.shadow-lg {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Légèrement plus doux que le 0 0 15px */
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.hover\:shadow-xl:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Amélioration de l'ombre au survol */
+}
+
+/* Header de la sidebar */
+.p-4 {
+    padding: 1rem;
+}
+
+.bg-blue-600 {
+    background-color: #2563EB;
+}
+
+.text-white {
+    color: white;
+}
+
+.text-xl {
+    font-size: 1.25rem;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.text-sm {
+    color: #9CA3AF;
+}
+
+.text-blue-100 {
+    color: #BFDBFE;
+}
+
+.mt-1 {
+    margin-top: 0.25rem;
+}
+
+/* Navigation */
+.p-2 {
+    padding: 0.5rem;
+}
+
+.space-y-1 > * + * {
+    margin-top: 0.25rem;
+}
+
+/* Items de catégorie */
+.category-item {
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-item.bg-blue-50 {
+    background-color: #EFF6FF;
+    color: #2563EB;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombre douce pour améliorer l'esthétique */
+    transform: scale(1.02);
+}
+
+.category-item:hover {
+    background-color: #F3F4F6;
+}
+
+.category-item a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+}
+
+.opacity-60 {
+    opacity: 0.6;
+}
+
+/* Contenu principal */
+.flex-1 {
+    flex: 1;
+}
+
+.p-8 {
+    padding: 2rem;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+/* Sections */
+.section-container {
+    margin-bottom: 1.5rem;
+}
+
+.section-container button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: none;
+    border: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.section-container button:hover {
+    background-color: #F9FAFB;
+}
+
+.text-gray-400 {
+    color: #9CA3AF;
+}
+
+.text-gray-600 {
+    color: #4B5563;
+}
+
+/* Images et aperçu */
+.h-64 {
+    height: 16rem;
+}
+
+.bg-gray-100 {
+    background-color: #F3F4F6;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.object-cover {
+    object-fit: cover;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+/* Liste des avantages */
+.space-y-2 > * + * {
+    margin-top: 0.5rem;
+}
+
+.text-blue-700 {
+    color: #1D4ED8;
+}
+
+li.flex {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.w-2 {
+    width: 0.5rem;
+}
+
+.h-2 {
+    height: 0.5rem;
+}
+
+.bg-blue-500 {
+    background-color: #3B82F6;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+/* Bouton d'ajout au panier */
+.add-to-cart {
+    width: 100%;
+    background-color: #2563EB;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #1D4ED8;
+}
+
+.mr-2 {
+    margin-right: 0.5rem;
+}
+
+/* Sidebar droite */
+.w-80 {
+    width: 20rem;
+}
+
+/* Visualisation 3D */
+.mb-8 {
+    margin-bottom: 2rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.h-48 {
+    height: 12rem;
+}
+
+.group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+}
+
+.inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/* Caractéristiques */
+.bg-gray-50 {
+    background-color: #F9FAFB;
+}
+
+.hover\:bg-gray-100:hover {
+    background-color: #F3F4F6;
+}
+
+/* Select et inputs */
+select, input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.5rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus, input:focus {
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Prix */
+.bg-green-50 {
+    background-color: #ECFDF5;
+}
+
+.text-green-800 {
+    color: #065F46;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+.text-green-600 {
+    color: #059669;
+}
+
+.text-green-500 {
+    color: #10B981;
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}
+
+/* Chat widget */
+.chat-widget {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 20rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre plus douce */
+    transform: translateY(calc(100% - 3rem));
+    transition: transform 0.3s ease;
+}
+
+.chat-widget .messages-container {
+    height: 16rem;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    background-color: #F9FAFB;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.chat-widget .message-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.5rem;
+}
+
+.send-message {
+    padding: 0.75rem;
+    background-color: #2563EB;
+    color: white;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.send-message:hover {
+    background-color: #1D4ED8;
+}
+
+/* Utilitaires */
+.hidden {
+    display: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.transform {
+    transform: translateY(-50%);
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+/* Animations de base */
+.category-item {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .category-item:hover {
+    transform: scale(1.02);
+    background-color: #f0f0f0;
+  }
+  
+  .chevron-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .category-item.active .chevron-icon {
+    transform: rotate(90deg);
+  }
+  
+  .card {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Animation des sections déroulantes */
+  .section {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
+  }
+  
+  .section.open {
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  /* Animation d'agrandissement */
+.scale-up {
+    animation: scale-up 0.3s ease-in-out forwards;
+}
+
+@keyframes scale-up {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+/* Animation de fondu */
+.fade-in {
+    animation: fade-in 0.5s ease-in forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    animation: fade-out 0.5s ease-out forwards;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Animation de glissement */
+.translate-y-0 {
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(0);
+}
