@@ -42,21 +42,19 @@ class Commande
     private ?string $statut = null;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    #[Assert\NotNull(message: "La date de début de location ne peut pas être vide.")]
     private ?DateTimeImmutable $dateDebutLocation = null;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    #[Assert\NotNull(message: "La date de fin de location ne peut pas être vide.")]
     private ?DateTimeImmutable $dateFinLocation = null;
 
     public function __construct()
     {
         $this->dateCommande = new DateTimeImmutable();
-        $this->statut = 'en attente'; // Statut par défaut
+        $this->statut = 'en attente';
         $this->prestations = new ArrayCollection();
     }
 
-    // Getters et setters
+    // Getters et Setters
 
     public function getId(): ?int
     {
@@ -68,7 +66,7 @@ class Commande
         return $this->dateCommande;
     }
 
-    public function setDateCommande(DateTimeImmutable $dateCommande): static
+    public function setDateCommande(DateTimeImmutable $dateCommande): self
     {
         $this->dateCommande = $dateCommande;
         return $this;
@@ -79,7 +77,7 @@ class Commande
         return $this->client;
     }
 
-    public function setClient(?User $client): static
+    public function setClient(?User $client): self
     {
         $this->client = $client;
         return $this;
@@ -90,7 +88,7 @@ class Commande
         return $this->prestations;
     }
 
-    public function addPrestation(Prestation $prestation): static
+    public function addPrestation(Prestation $prestation): self
     {
         if (!$this->prestations->contains($prestation)) {
             $this->prestations[] = $prestation;
@@ -98,7 +96,7 @@ class Commande
         return $this;
     }
 
-    public function removePrestation(Prestation $prestation): static
+    public function removePrestation(Prestation $prestation): self
     {
         $this->prestations->removeElement($prestation);
         return $this;
@@ -109,7 +107,7 @@ class Commande
         return $this->detailCommande;
     }
 
-    public function setDetailCommande(string $detailCommande): static
+    public function setDetailCommande(string $detailCommande): self
     {
         $this->detailCommande = $detailCommande;
         return $this;
@@ -120,7 +118,7 @@ class Commande
         return $this->montantTotal;
     }
 
-    public function setMontantTotal(float $montantTotal): static
+    public function setMontantTotal(float $montantTotal): self
     {
         $this->montantTotal = $montantTotal;
         return $this;
@@ -131,7 +129,7 @@ class Commande
         return $this->statut;
     }
 
-    public function setStatut(string $statut): static
+    public function setStatut(string $statut): self
     {
         $this->statut = $statut;
         return $this;
@@ -142,7 +140,7 @@ class Commande
         return $this->dateDebutLocation;
     }
 
-    public function setDateDebutLocation(?DateTimeImmutable $dateDebutLocation): static
+    public function setDateDebutLocation(?DateTimeImmutable $dateDebutLocation): self
     {
         $this->dateDebutLocation = $dateDebutLocation;
         return $this;
@@ -153,7 +151,7 @@ class Commande
         return $this->dateFinLocation;
     }
 
-    public function setDateFinLocation(?DateTimeImmutable $dateFinLocation): static
+    public function setDateFinLocation(?DateTimeImmutable $dateFinLocation): self
     {
         $this->dateFinLocation = $dateFinLocation;
         return $this;

@@ -12,6 +12,8 @@ services:
             $entityManager: '@doctrine.orm.entity_manager'
             $pdfGenerator: '@App\Service\PdfGenerator'
             $invoiceMailer: '@App\Service\InvoiceMailer'
+    App\Command\AlerteCommandeCommand:
+        tags: ['console.command']
 
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

@@ -2,10 +2,10 @@
 
 namespace App\Repository;
 
-use App\Entity\Commande;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use DateTimeImmutable;
+use App\Entity\Commande;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Commande>
@@ -17,14 +17,17 @@ class CommandeRepository extends ServiceEntityRepository
         parent::__construct($registry, Commande::class);
     }
 
-    public function findCommandesProchesEcheance(DateTimeImmutable $dateLimite)
+    public function findCommandesAvecEcheanceProche(DateTimeImmutable $dateLimite): array
     {
+        $aujourdhui = new DateTimeImmutable();
+
         return $this->createQueryBuilder('c')
-            ->where('c.dateFinLocation <= :dateLimite')
+            ->where('c.dateFinLocation BETWEEN :aujourdhui AND :dateLimite')
+            ->setParameter('aujourdhui', $aujourdhui)
             ->setParameter('dateLimite', $dateLimite)
             ->getQuery()
             ->getResult();
-    }
+    } 
 
     public function countPanneauxDisponibles(): int
     {
@@ -34,7 +37,7 @@ class CommandeRepository extends ServiceEntityRepository
         $sql = 'SELECT COUNT(*) FROM prestation WHERE available = 1';
         $stmt = $conn->executeQuery($sql);
         
-        return (int) $stmt->fetchOne(); // Retourne le résultat comme un entier
+        return (int) $stmt->fetchOne();
     }
 
     public function countPanneauxLouesParMois(string $statut = 'livrée'): array
@@ -55,10 +58,9 @@ class CommandeRepository extends ServiceEntityRepository
             $date = $commande['dateCommande'];
             
             if ($date) {
-                $month = (int) $date->format('m'); // Obtenir le mois (1-12)
-                $year = (int) $date->format('Y'); // Obtenir l'année
+                $month = (int) $date->format('m');
+                $year = (int) $date->format('Y');  
                 
-                // Créer une clé unique pour l'année et le mois
                 $key = sprintf('%d-%02d', $year, $month);
                 
                 if (!isset($panneauxParMois[$key])) {
@@ -68,7 +70,6 @@ class CommandeRepository extends ServiceEntityRepository
             }
         }
     
-        // Formater le résultat pour qu'il soit plus facile à utiliser
         $result = [];
         foreach ($panneauxParMois as $key => $count) {
             list($year, $month) = explode('-', $key);
@@ -80,8 +81,6 @@ class CommandeRepository extends ServiceEntityRepository
     
         return $result;
     }
-    
-
 
     public function calculateTotalRevenue(): float
     {
@@ -90,4 +89,28 @@ class CommandeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+
+    public function countServicesAutresQuePanneau(): int
+    {
+        return (int) $this->createQueryBuilder('c')
+            ->select('COUNT(p.id)')
+            ->join('c.prestations', 'p')
+            ->where('p.category != :category')
+            ->setParameter('category', 'Panneau')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countPanneauxLoue(): int
+    {
+        return (int) $this->createQueryBuilder('c')
+            ->select('COUNT(p.id)')
+            ->join('c.prestations', 'p')
+            ->where('p.category = :category')
+            ->setParameter('category', 'Panneau')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }  
+    
 }

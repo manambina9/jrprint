@@ -11,6 +11,7 @@
         <p style="font-size: 20px; font-weight: 300; color: rgba(255, 255, 255, 0.9); margin-bottom: 0; position: relative; z-index: 1;">Gérez vos panneaux publicitaires et suivez vos projets en temps réel.</p>
     </span>
     
+    
     <div class="row">
         <div class="col-lg-3 col-sm-6 mb-4">
             <div class="card text-white bg-primary card-hover">
@@ -24,7 +25,7 @@
             <div class="card text-white bg-success card-hover">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-check-circle"></i> Panneaux loués</h5>
-                    <p class="card-text display-4"><span>{{ panneauxLoues }}</span></p>
+                    <p class="card-text display-4"><span>{{ nombrePanneauLoue }}</span></p>
                 </div>
             </div>
         </div>
@@ -32,7 +33,7 @@
             <div class="card text-white bg-warning card-hover">
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-project-diagram"></i> Projets d'habillage</h5>
-                    <p class="card-text display-4"><span>{{ servicesAutresQuePanneaux }}</span></p>  
+                    <p class="card-text display-4"><span>{{ nombre_services_autres_que_panneau }}</span></p>  
                 </div>
             </div>
         </div>
@@ -52,7 +53,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-users"></i> Gestion des utilisateurs</h5>
                     <p class="card-text">Ajouter ou modifier des utilisateurs.</p>
-                    <a href="{{ path('app_accueil') }}" class="btn btn-primary mt-auto">Voir</a>
+                    <a href="{{ path('admin', { 'crudAction': 'index', 'crudControllerFqcn': 'App\\Controller\\Admin\\UserCrudController' }) }}" class="btn btn-primary mt-auto">Voir utilisateurs</a>
                 </div>
             </div>
         </div>
@@ -70,7 +71,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-paint-brush"></i> Projets d'habillage</h5>
                     <p class="card-text">Suivre les projets d'habillage en cours.</p>
-                    <a href="{{ path('app_accueil') }}" class="btn btn-warning mt-auto">Voir</a>
+                    <a href="{{ path('admin', { 'crudAction': 'index', 'crudControllerFqcn': 'App\\Controller\\Admin\\FactureCrudController' }) }}" class="btn btn-warning mt-auto">Voir Facture</a>
                 </div>
             </div>
         </div>
@@ -79,7 +80,8 @@
                 <div class="card-body">
                     <h5 class="card-title"><i class="fas fa-chart-line"></i> Statistiques</h5>
                     <p class="card-text">Voir les statistiques générales.</p>
-                    <a href="{{ path('app_accueil') }}" class="btn btn-danger mt-auto">Voir</a>
+                    <a href="{{ path('admin', { 'crudAction': 'index', 'crudControllerFqcn': 'App\\Controller\\Admin\\TableauBordController' }) }}" class="btn btn-danger mt-auto">Voir les statistique</a>
+
                 </div>
             </div>
         </div>
@@ -164,7 +166,7 @@
         <div class="col-lg-6 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Utilisateurs et panneaux loués par mois</h5>
+                    <h5 class="card-title">Utilisateurs par mois</h5>
                     <canvas id="userPanelChart"></canvas>
                 </div>
             </div>
@@ -179,6 +181,10 @@
         </div>
     </div>
 
+    <div class="afaire">
+        <h1> A faire</h1>
+        <p>Affiche la graphe pour tout les services du mois </p>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
@@ -311,40 +317,149 @@
 
 
     var ctxPanelRentals = document.getElementById('panelRentalsChart').getContext('2d');
+    Chart.defaults.backgroundColor = '#9BD0F5';
+
     var panelRentalsChart = new Chart(ctxPanelRentals, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [{
                 label: 'Panneaux loués',
                 data: panelRentalsCounts,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 2,
+                borderRadius: 5, // Coins arrondis pour les barres
+                hoverBackgroundColor: 'rgba(54, 162, 235, 0.8)',
+                hoverBorderColor: 'rgba(54, 162, 235, 1.2)',
                 fill: true
             }]
         },
         options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        color: '#333' // Couleur des labels de la légende
+                    }
+                },
+                title: {
+                    display: true,
+                    font: {
+                        size: 20,
+                        weight: 'bold'
+                    },
+                    color: '#111', // Couleur du titre
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.7)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: '#54a6eb',
+                    borderWidth: 1,
+                    padding: 10
+                }
+            },
             scales: {
                 x: {
                     title: {
                         display: true,
-                        text: 'Mois'
+                        text: 'Mois',
+                        color: '#444',
+                        font: {
+                            size: 14,
+                            style: 'italic'
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(200, 200, 200, 0.2)', // Couleur de la grille sur l'axe x
+                        borderColor: '#ccc',
+                        borderWidth: 1
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: 'Nombre de panneaux loués'
+                        text: 'Nombre de panneaux loués',
+                        color: '#444',
+                        font: {
+                            size: 14,
+                            style: 'italic'
+                        }
                     },
                     beginAtZero: true,
                     ticks: {
-                        stepSize: 1
+                        stepSize: 1,
+                        color: '#333' // Couleur des labels sur l'axe y
+                    },
+                    grid: {
+                        color: 'rgba(200, 200, 200, 0.2)', // Couleur de la grille sur l'axe y
+                        borderColor: '#ccc',
+                        borderWidth: 1
                     }
                 }
             }
         }
-    });
+});
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorieField = document.querySelector('#prestation_categorie');
+            const titreField = document.querySelector('#prestation_titre');
+
+            const optionsPanneau = {
+                'Panneau sucette (Format 2*1)': 'Panneau sucette (Format 2*1)',
+                'Panneau (Format 4x3)': 'Panneau (Format 4x3)',
+                'Panneau (Format 8x3)': 'Panneau (Format 8x3)',
+                'Panneau (Format 12x3)': 'Panneau (Format 12x3)',
+                'Panneau (Format 9x3)': 'Panneau (Format 9x3)',
+                'Panneau (Format 6x3)': 'Panneau (Format 6x3)',
+            };
+
+            const optionsAutresServices = {
+                'Habillages cuves & Transtack': 'Habillages cuves & Transtack',
+                'Décorations évènementielles': 'Décorations évènementielles',
+                'Silhouettes': 'Silhouettes',
+                'Habillage véhicules': 'Habillage véhicules',
+                'Décorations Plaque sur PVC': 'Décorations Plaque sur PVC',
+                'Photobooth': 'Photobooth',
+                'Habillages vitrines / Vitrophanie': 'Habillages vitrines / Vitrophanie',
+                'Branding 3': 'Branding 3',
+                'Photocall': 'Photocall',
+                'Habillages comptoirs': 'Habillages comptoirs',
+                'Totem': 'Totem',
+                'Bâche tendue': 'Bâche tendue',
+                'Stop trottoir': 'Stop trottoir',
+                'Habillages boutiques': 'Habillages boutiques'
+            };
+
+            categorieField.addEventListener('change', function() {
+                const selectedCategorie = categorieField.value;
+
+                // Clear existing options in titreField
+                titreField.innerHTML = '<option value="">Sélectionnez un titre</option>';
+
+                // Populate the titreField based on the selected category
+                const options = selectedCategorie === 'Panneau' ? optionsPanneau : optionsAutresServices;
+                
+                for (const [value, label] of Object.entries(options)) {
+                    const option = document.createElement('option');
+                    option.value = value;
+                    option.textContent = label;
+                    titreField.appendChild(option);
+                }
+            });
+        });
+
+
     </script>
 
     <style>
@@ -367,4 +482,10 @@
         }
     </style>
 </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/admin.js') }}"></script>
 {% endblock %}
