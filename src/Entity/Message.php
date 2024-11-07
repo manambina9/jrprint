@@ -1,90 +1,62 @@
 <?php
 
+// src/Entity/Message.php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity()]
+#[ORM\Entity]
 class Message
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $subject = null;
+    private $id;
 
     #[ORM\Column(type: 'text')]
-    private ?string $message = null;
+    private $content;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isAdmin;
 
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $createdAt = null;
+    private $createdAt;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getContent(): ?string
     {
-        return $this->name;
+        return $this->content;
     }
 
-    public function setName(string $name): self
+    public function setContent(string $content): self
     {
-        $this->name = $name;
+        $this->content = $content;
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getIsAdmin(): ?bool
     {
-        return $this->email;
+        return $this->isAdmin;
     }
 
-    public function setEmail(string $email): self
+    public function setIsAdmin(bool $isAdmin): self
     {
-        $this->email = $email;
+        $this->isAdmin = $isAdmin;
         return $this;
     }
 
-    public function getSubject(): ?string
-    {
-        return $this->subject;
-    }
-
-    public function setSubject(string $subject): self
-    {
-        $this->subject = $subject;
-        return $this;
-    }
-
-    public function getMessage(): ?string
-    {
-        return $this->message;
-    }
-
-    public function setMessage(string $message): self
-    {
-        $this->message = $message;
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-        return $this;
     }
 }

@@ -2,45 +2,59 @@
 
 namespace App\Controller\User;
 
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use App\Entity\Prestation;
+use App\Entity\Category;
+use App\Entity\Message;
+use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class userController extends AbstractDashboardController
+class UserController extends AbstractController
 {
-    #[Route('/user/dashboard', name: 'user')]
-    public function index(): Response
-    {
-        //return parent::index();
+    #[Route('/user/dashboard/{id}', name: 'app_user_dashboard')]
+    public function show(
+        int $id,
+        CategoryRepository $categoryRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $prestation = $entityManager->getRepository(Prestation::class)->find($id);
 
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
+        if (!$prestation) {
+            throw $this->createNotFoundException('Prestation not found.');
+        }
 
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
+        $categories = $categoryRepository->findAll();
 
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        return $this->render('user/index.html.twig');
+        return $this->render('User/index.html.twig', [
+            'prestation' => $prestation,
+            'categories' => $categories,
+        ]);
     }
 
-    public function configureDashboard(): Dashboard
-    {
-        return Dashboard::new()
-            ->setTitle('Jrprint');
-    }
 
-    public function configureMenuItems(): iterable
-    {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+    #[Route('/api/messages', name: 'api_messages_send', methods: ['POST'])]
+    public function sendMessage(
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): JsonResponse {
+        $data = json_decode($request->getContent(), true);
+
+        $message = new Message();
+        $message->setContent($data['content'] ?? '');
+        $message->setIsAdmin(false);
+
+        $entityManager->persist($message);
+        $entityManager->flush();
+
+        return $this->json([
+            'id' => $message->getId(),
+            'content' => $message->getContent(),
+            'isAdmin' => $message->getIsAdmin(),
+            'createdAt' => $message->getCreatedAt()->format('Y-m-d H:i:s')
+        ]);
     }
 }
