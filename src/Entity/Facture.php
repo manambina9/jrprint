@@ -87,7 +87,7 @@ class Facture
     {
         if (!$this->prestations->contains($prestation)) {
             $this->prestations[] = $prestation;
-            $this->calculerMontantTotal();  // Mettre à jour le montant total
+            $this->calculerMontantTotal(); 
         }
         return $this;
     }

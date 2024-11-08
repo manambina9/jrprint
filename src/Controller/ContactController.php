@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Validation;
-
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'contact')]
@@ -35,16 +35,22 @@ class ContactController extends AbstractController
                 $this->addFlash('error', 'Veuillez entrer une adresse email valide.');
                 return $this->redirectToRoute('contact');
             }
-            //mail
-            $emailMessage = (new Email())
-                ->from($email)
-                ->to('kellymanambina@gmail.com') 
-                ->subject($subject)
-                ->text("Name: $name\nEmail: $email\nMessage:\n$messageContent");
+            //mail 
+            $emailMessage = (new TemplatedEmail())
+            ->from($email)
+            ->to('kellymanambina@gmail.com')
+            ->subject($subject)
+            ->htmlTemplate('emails/contact_email.html.twig')
+            ->context([
+                'name' => $name,
+                'userEmail' => $email,
+                'subject' => $subject,
+                'messageContent' => $messageContent,
+            ]);
 
             try {
                 $mailer->send($emailMessage);
-
+            
                 //base de données
                 $message = new Message();
                 $message->setName($name);
@@ -52,14 +58,16 @@ class ContactController extends AbstractController
                 $message->setSubject($subject);
                 $message->setMessage($messageContent);
                 $message->setCreatedAt(new \DateTime());
- 
+            
                 $entityManager->persist($message);
                 $entityManager->flush();
- 
+            
                 $this->addFlash('success', 'Votre message a été envoyé avec succès!');
             } catch (\Exception $e) { 
+                dd($e->getMessage()); // Affiche le message d'erreur spécifique
                 $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer plus tard.');
             }
+                    
 
             return $this->redirectToRoute('contact');
         }
