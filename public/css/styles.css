@@ -117,7 +117,7 @@ a:hover {
 
 footer {
     background-color: #628ea2;
-    clip-path: polygon(37% 8%, 72% 7%, 100% 3%, 100% 100%, 70% 100%, 30% 100%, 0 100%, 0 0);
+    clip-path: polygon(50% 7%, 100% 0, 100% 100%, 0 99%, 0 0);
 }
 
 footer a {

@@ -2,14 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\PrestationRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Repository\PrestationRepository;
 use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: PrestationRepository::class)]
 #[Vich\Uploadable]
@@ -21,35 +19,28 @@ class Prestation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le titre ne peut pas être vide.")]
-    private ?string $title = null;
+    private ?string $name = null;
 
-    #[ORM\Column(type: "text")]
-    #[Assert\NotBlank(message: "La description ne peut pas être vide.")]
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
-    #[ORM\Column(type: "decimal", precision: 10, scale: 2)]
-    #[Assert\NotBlank(message: "Le prix ne peut pas être vide.")]
-    private ?float $price = null;
+    #[ORM\Column(type: 'json')]
+    private ?array $advantages = [];
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $available;
+
+    #[ORM\Column(type: 'json')]
+    private ?array $characteristics = [];
+
+    #[ORM\Column(type: 'json')]
+    private ?array $images3d = [];
+
+    #[ORM\Column(type: 'json')]
+    private ?array $locations = [];
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "La catégorie ne peut pas être vide.")]
     private ?string $category = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $location = null;
-
-    #[ORM\Column]
-    private bool $available = true;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $quantityAvailable = null;
-
-    #[ORM\Column(type: 'datetime')]
-    private \DateTimeInterface $createdAt;
-
-    #[ORM\Column(type: 'datetime')]
-    private \DateTimeInterface $updatedAt;
 
     #[ORM\Column(nullable: true)]
     private ?string $imageUrl = null;
@@ -57,31 +48,22 @@ class Prestation
     #[Vich\UploadableField(mapping: 'prestations_images', fileNameProperty: 'imageUrl')]
     private ?File $imageFile = null;
 
-    #[ORM\OneToMany(mappedBy: 'prestation', targetEntity: Promotion::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
-    private Collection $promotions;
-
-    public function __construct()
-    {
-        $this->promotions = new ArrayCollection();
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
-    }
-
-    // Getters et setters
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): static
+    public function setName(string $name): static
     {
-        $this->title = $title;
+        $this->name = $name;
         return $this;
     }
 
@@ -96,14 +78,58 @@ class Prestation
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getAdvantages(): ?array
     {
-        return $this->price;
+        return $this->advantages;
     }
 
-    public function setPrice(float $price): static
+    public function setAdvantages(?array $advantages): static
     {
-        $this->price = $price;
+        $this->advantages = $advantages ?? [];
+        return $this;
+    }
+
+    public function getCharacteristics(): ?array
+    {
+        return $this->characteristics;
+    }
+
+    public function setCharacteristics(?array $characteristics): static
+    {
+        $this->characteristics = $characteristics ?? [];
+        return $this;
+    }
+
+    public function getImages3d(): ?array
+    {
+        return $this->images3d;
+    }
+
+    public function setImages3d(?array $images3d): static
+    {
+        $this->images3d = $images3d ?? [];
+        return $this;
+    }
+
+    public function getLocations(): ?array
+    {
+        return $this->locations;
+    }
+
+    public function setLocations(?array $locations): static
+    {
+        $this->locations = $locations ?? [];
+        return $this;
+    }
+
+    public function isAvailable(): ?bool
+    {
+        return $this->available;
+    }
+
+    public function setAvailable(bool $available): self
+    {
+        $this->available = $available;
         return $this;
     }
 
@@ -118,55 +144,6 @@ class Prestation
         return $this;
     }
 
-    public function getLocation(): ?string
-    {
-        return $this->location;
-    }
-
-    public function setLocation(?string $location): static
-    {
-        $this->location = $location;
-        return $this;
-    }
-
-    public function isAvailable(): bool
-    {
-        return $this->available;
-    }
-
-    public function setAvailable(bool $available): static
-    {
-        $this->available = $available;
-        return $this;
-    }
-
-    public function getQuantityAvailable(): ?int
-    {
-        return $this->quantityAvailable;
-    }
-
-    public function setQuantityAvailable(?int $quantityAvailable): static
-    {
-        $this->quantityAvailable = $quantityAvailable;
-        return $this;
-    }
-
-    public function getCreatedAt(): \DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function getUpdatedAt(): \DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
-
     public function getImageUrl(): ?string
     {
         return $this->imageUrl;
@@ -178,43 +155,34 @@ class Prestation
         return $this;
     }
 
-    public function setImageFile(?File $imageFile = null): static
-    {
-        $this->imageFile = $imageFile;
-        if ($imageFile) {
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-        return $this;
-    }
-
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
-    public function getPromotions(): Collection
+    public function setImageFile(?File $imageFile): self
     {
-        return $this->promotions;
-    }
+        $this->imageFile = $imageFile;
 
-    public function addPromotion(Promotion $promotion): static
-    {
-        if (!$this->promotions->contains($promotion)) {
-            $this->promotions->add($promotion);
-            $promotion->setPrestation($this);
+        if ($imageFile !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
         }
+
         return $this;
     }
 
-    public function removePromotion(Promotion $promotion): static
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        if ($this->promotions->removeElement($promotion) && $promotion->getPrestation() === $this) {
-            $promotion->setPrestation(null);
-        }
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 
-    #[Assert\Callback]
+    #[Callback]
     public function validateLocation(ExecutionContextInterface $context): void
     {
         if ($this->category === 'Panneau' && empty($this->location)) {
@@ -223,9 +191,8 @@ class Prestation
                 ->addViolation();
         }
     }
-
-    public function __toString() {
-        return $this->title;
+    public function __toString(): string
+    {
+        return $this->name ?: 'Prestation';
     }
-    
 }
