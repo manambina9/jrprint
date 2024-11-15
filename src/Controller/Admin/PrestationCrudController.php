@@ -4,20 +4,21 @@ namespace App\Controller\Admin;
 
 use App\Entity\Prestation;
 use App\Repository\PrestationRepository;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use Vich\UploaderBundle\Form\Type\VichImageType;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class PrestationCrudController extends AbstractCrudController
 {
@@ -36,11 +37,13 @@ class PrestationCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        // Définition des choix de catégories
         $categoryChoices = [
             'Panneau' => 'Panneau',
             'Autres Services' => 'Autres Services',
         ];
 
+        // Titres pour la catégorie Panneau
         $panneauTitles = [
             'Panneau sucette – Format 2*1',
             'Panneau – Format 4x3',
@@ -50,6 +53,7 @@ class PrestationCrudController extends AbstractCrudController
             'Panneau – Format 6x3',
         ];
 
+        // Titres pour la catégorie Autres Services
         $autresServicesTitles = [
             'Habillages cuves & Transtack',
             'Décorations évènementielles',
@@ -67,30 +71,60 @@ class PrestationCrudController extends AbstractCrudController
             'Habillages boutiques',
         ];
 
+        // Champs de catégorie et de titre
         $categoryField = ChoiceField::new('category', 'Catégorie')
             ->setChoices($categoryChoices)
             ->setRequired(true);
 
-        $titleField = ChoiceField::new('title', 'Titre')
-            ->setChoices(array_combine($panneauTitles, $panneauTitles) + array_combine($autresServicesTitles, $autresServicesTitles))
+        $titleField = ChoiceField::new('name', 'Titre')
+            ->setChoices(array_merge(
+                array_combine($panneauTitles, $panneauTitles),
+                array_combine($autresServicesTitles, $autresServicesTitles)
+            ))
             ->setRequired(true);
-        
 
-        return [
-            IdField::new('id')->hideOnForm()->hideOnIndex(),
-            $categoryField,
-            $titleField,
-            TextEditorField::new('description', 'Description')->setRequired(true),
-            MoneyField::new('price', 'Prix')->setCurrency('MGA')->setRequired(true),
-            TextField::new('location', 'Localisation')->setHelp('Obligatoire pour les panneaux'),
-            BooleanField::new('available', 'Disponible'),
-            TextField::new('imageFile', 'Nouvelle Image')->setFormType(VichImageType::class)->onlyOnForms(),
-            ImageField::new('imageUrl', 'Image')->setBasePath('/images/prestations')->onlyOnIndex(),
-            IntegerField::new('quantityAvailable', 'Qt disponible'),
-            DateTimeField::new('createdAt', 'Créé le')->hideOnForm(),
-            DateTimeField::new('updatedAt', 'Mis à jour le')->hideOnIndex(),
-            AssociationField::new('promotions', 'Promotions')->setRequired(false),
-        ];
+            return [
+                IdField::new('id')->hideOnForm(),
+                
+                $categoryField,
+                $titleField,
+                
+                TextEditorField::new('description', 'Description')
+                    ->setRequired(true)
+                    ->setHelp('Entrez une description complète de la prestation'),
+                
+                ArrayField::new('advantages', 'Avantages')
+                    ->setHelp('Liste des avantages sous forme de tableau JSON'),
+                
+                ArrayField::new('characteristics', 'Caractéristiques')
+                    ->setHelp('Liste des caractéristiques sous forme de tableau JSON'),
+                
+                ArrayField::new('images3d', 'Images 3D')
+                    ->setHelp('Images 3D sous forme de tableau JSON'),
+                
+                ArrayField::new('locations', 'Localisation')
+                    ->setHelp('Obligatoire pour les panneaux'),
+                
+                BooleanField::new('available', 'Disponible'),
+                
+                TextField::new('imageFile', 'Nouvelle Image')
+                    ->setFormType(VichImageType::class)
+                    ->onlyOnForms()
+                    ->setHelp('Téléchargez une nouvelle image pour la prestation'),
+                
+                ImageField::new('imageUrl', 'Image')
+                    ->setBasePath('/images/prestations')
+                    ->onlyOnIndex()
+                    ->setHelp('Image actuelle de la prestation'),
+                
+                DateTimeField::new('createdAt', 'Créé le')
+                    ->hideOnForm()
+                    ->setHelp('Date de création de la prestation'),
+                
+                DateTimeField::new('updatedAt', 'Mis à jour le')
+                    ->hideOnIndex()
+                    ->setHelp('Dernière mise à jour de la prestation')
+            ];
     }
 
     #[Route('/prestations/category/{category}', name: 'app_show_prestations_by_category')]

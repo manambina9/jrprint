@@ -53,16 +53,16 @@ class UserController extends AbstractController
         }
 
         $message = new Message();
-        $message->setContent($data['content']);
-        $message->setIsAdmin(false);
+        //$message->setContent($data['content'] ?? '');
+        //$message->setIsAdmin(false);
 
         $entityManager->persist($message);
         $entityManager->flush();
 
         return $this->json([
             'id' => $message->getId(),
-            'content' => $message->getContent(),
-            'isAdmin' => $message->getIsAdmin(),
+          //  'content' => $message->getContent(),
+            ///'isAdmin' => $message->getIsAdmin(),
             'createdAt' => $message->getCreatedAt()->format('Y-m-d H:i:s')
         ]);
     }

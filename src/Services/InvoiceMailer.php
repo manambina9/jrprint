@@ -1,10 +1,9 @@
 <?php
 namespace App\Services;
-// src/Services/InvoiceMailer.php
 
 use App\Entity\Commande;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 
 class InvoiceMailer
 {
@@ -17,14 +16,17 @@ class InvoiceMailer
 
     public function sendInvoice(Commande $commande, string $pdfFilePath): void
     {
-        $email = (new Email())
-            ->from('kellymanambina@gmail.com') // Remplacez par votre adresse e-mail
-            ->to($commande->getClient()->getEmail())
-            ->subject('Votre facture')
-            ->text('Merci pour votre commande. Vous trouverez ci-joint la facture.')
-            ->attachFromPath($pdfFilePath, 'facture.pdf');
+        // Récupérer le client via l'entité User associée
+        $client = $commande->getClient();
+        $clientEmail = $client->getEmail();
 
-        // Envoyer l'e-mail
+        $email = (new TemplatedEmail())
+            ->from('kellymanambina@gmail.com')
+            ->to($clientEmail)
+            ->subject('Votre facture - Merci de votre confiance')
+            ->htmlTemplate('emails/facture_email.html.twig')
+            ->attachFromPath($pdfFilePath, 'facture.pdf');
+    
         $this->mailer->send($email);
     }
 }
