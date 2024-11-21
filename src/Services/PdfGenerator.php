@@ -95,7 +95,7 @@ class PdfGenerator
                 <p>Date de commande: ' . $commande->getDateCommande()->format('d/m/Y') . '</p>
 
                 <div class="details">
-                    <h2>Détails de la commande</h2>
+                    <h2>Détails de la commandet</h2>
                     <table>
                         <thead>
                             <tr>

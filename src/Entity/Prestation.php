@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PrestationRepository::class)]
 #[Vich\Uploadable]
@@ -46,6 +47,12 @@ class Prestation
     private ?string $imageUrl = null;
 
     #[Vich\UploadableField(mapping: 'prestations_images', fileNameProperty: 'imageUrl')]
+    #[Assert\File(
+        maxSize: '50M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+        maxSizeMessage: 'Le fichier est trop volumineux. La taille maximale autorisée est de 5 Mo.',
+        mimeTypesMessage: 'Seuls les fichiers JPEG, PNG ou WebP sont autorisés.'
+    )]
     private ?File $imageFile = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
@@ -185,9 +192,9 @@ class Prestation
     #[Callback]
     public function validateLocation(ExecutionContextInterface $context): void
     {
-        if ($this->category === 'Panneau' && empty($this->location)) {
+        if ($this->category === 'Panneau' && empty($this->locations)) {
             $context->buildViolation("Le champ de localisation est obligatoire pour les panneaux.")
-                ->atPath('location')
+                ->atPath('locations')
                 ->addViolation();
         }
     }
