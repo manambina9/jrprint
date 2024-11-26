@@ -22,6 +22,7 @@ class UserController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
         // Supposons que vous souhaitez récupérer la première prestation pour simplifier
+        
         $prestation = $entityManager->getRepository(Prestation::class)->findOneBy([]);
         
         if (!$prestation) {
