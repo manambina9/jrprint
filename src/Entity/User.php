@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -24,6 +23,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $entreprise = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private ?string $email = null;
 
     /**
@@ -31,7 +32,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private array $roles = [];
-    
 
     /**
      * @var string The hashed password
@@ -41,6 +41,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adresse = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\Regex('/^\d+$/', message: 'Le NIF doit contenir uniquement des chiffres.')]
+    private ?string $nif = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\NotBlank(message: 'Le STAT est requis.')]
+    private ?string $stat = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $cif = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $rcs = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $rc = null;
 
     public function __construct()
     {
@@ -52,20 +72,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    /**
-     * Get the value of entreprise
-     */ 
-    public function getEntreprise()
+    public function getEntreprise(): ?string
     {
         return $this->entreprise;
     }
 
-    /**
-     * Set the value of entreprise
-     *
-     * @return  self
-     */ 
-    public function setEntreprise($entreprise)
+    public function setEntreprise(?string $entreprise): static
     {
         $this->entreprise = $entreprise;
 
@@ -84,33 +96,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     *
-     * @return list<string>
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -118,9 +116,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
     public function getPassword(): string
     {
         return $this->password;
@@ -133,13 +128,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
@@ -154,11 +144,80 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * Convert the User object to a string
-     */
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?string $adresse): static
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getNif(): ?string
+    {
+        return $this->nif;
+    }
+
+    public function setNif(?string $nif): static
+    {
+        $this->nif = $nif;
+
+        return $this;
+    }
+
+    public function getStat(): ?string
+    {
+        return $this->stat;
+    }
+
+    public function setStat(?string $stat): static
+    {
+        $this->stat = $stat;
+
+        return $this;
+    }
+
+    public function getCif(): ?string
+    {
+        return $this->cif;
+    }
+
+    public function setCif(?string $cif): static
+    {
+        $this->cif = $cif;
+
+        return $this;
+    }
+
+    public function getRcs(): ?string
+    {
+        return $this->rcs;
+    }
+
+    public function setRcs(?string $rcs): static
+    {
+        $this->rcs = $rcs;
+
+        return $this;
+    }
+
+    public function getRc(): ?string
+    {
+        return $this->rc;
+    }
+
+    public function setRc(?string $rc): static
+    {
+        $this->rc = $rc;
+
+        return $this;
+    }
+
     public function __toString(): string
     {
-        return $this->email ?: 'No email';  
+        return $this->email ?: 'No email';
     }
 }
