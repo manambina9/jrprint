@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\DemandePrestation;
 use App\Form\DemandePrestationType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DemandePrestationController extends AbstractController
 {
@@ -20,61 +22,88 @@ class DemandePrestationController extends AbstractController
         Request $request, 
         EntityManagerInterface $entityManager, 
         MailerInterface $mailer, 
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        UserPasswordHasherInterface $passwordHasher
     ): Response {
         $demande = new DemandePrestation();
         $form = $this->createForm(DemandePrestationType::class, $demande);
         $form->handleRequest($request);
-    
+
         if ($request->isMethod('POST')) {
-            // Récupérer les données du formulaire
+            // Récupération des données du formulaire
             $nom = $request->request->get('nom');
             $societe = $request->request->get('societe');
             $email = $request->request->get('email');
+            $password = $request->request->get('password');
+            $passwordConfirmation = $request->request->get('password_confirmation');
             $telephone = $request->request->get('telephone');
             $adresse = $request->request->get('adresse');
             $codePostal = $request->request->get('code_postal');
             $ville = $request->request->get('ville');
             $prestation = $request->request->get('prestation');
             $message = $request->request->get('message');
-    
-            // Création de l'email
-            $emailMessage = (new Email())
-            ->from($email)
-            ->to('ramanamahefafabrice@gmail.com')
-            ->subject('Demande de Prestation - ' . $societe)
-            ->text("
-            Bonjour,
-        
-            Nous avons le plaisir de vous informer que nous avons reçu une nouvelle demande de prestation de la part de $nom représentant $societe. 
-        
-            Vous trouverez ci-dessous les informations concernant cette demande :
-            
-            Le client, $nom, peut être contacté à l'adresse email $email ou par téléphone au $telephone. Il réside à $adresse, $codePostal $ville.
-        
-            La prestation demandée est la suivante : $prestation.  
-            Voici également un message complémentaire du client :  
-            \"$message\".
-        
-            Nous vous remercions de bien vouloir traiter cette demande et restons à votre disposition pour toute information complémentaire.
-        
-            Cordialement,
-            ");
-        
-    
-            try {
-                // Envoi de l'email
-                $mailer->send($emailMessage);
-                // Message de succès
-                $this->addFlash('success', 'Votre demande a été envoyée avec succès !');
-            } catch (\Exception $e) {
-                // Log de l'erreur et message d'échec
-                $logger->error('Erreur lors de l\'envoi de l\'email : '.$e->getMessage());
-                $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer plus tard.');
+
+            // Vérification de l'email et du mot de passe
+            if (empty($email)) {
+                $this->addFlash('error', 'L\'adresse e-mail est obligatoire.');
+                return $this->redirectToRoute('formulaire_prestation');
             }
+
+            if ($password !== $passwordConfirmation) {
+                $this->addFlash('error', 'Les mots de passe ne correspondent pas.');
+                return $this->redirectToRoute('formulaire_prestation');
+            }
+
+            // Création de l'utilisateur
+            $user = new User();
+            $user->setNom($nom);
+            $user->setEmail($email);
+            $user->setTelephone($telephone);
+            $user->setAdresse($adresse);
+            $user->setCodePostal($codePostal);
+            $user->setVille($ville);
+            $user->setEntreprise($societe); // Assurez-vous que $societe n'est pas null
+            $user->setPassword($passwordHasher->hashPassword($user, $password));
+
+            // Enregistrement dans la base de données
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // Création et envoi de l'email
+            $emailMessage = (new Email())
+                ->from($email)
+                ->to('ramanamahefafabrice@gmail.com')
+                ->subject('Demande de Prestation - ' . $societe)
+                ->text("
+                Bonjour,
+
+                Nous avons le plaisir de vous informer que nous avons reçu une nouvelle demande de prestation de la part de $nom représentant $societe.
+
+                Voici les détails :
+                Nom : $nom
+                Société : $societe
+                Email : $email
+                Téléphone : $telephone
+                Adresse : $adresse, $codePostal $ville
+                Prestation demandée : $prestation
+
+                Message :
+                \"$message\".
+
+                Cordialement,
+                ");
+
+            try {
+                $mailer->send($emailMessage);
+                $this->addFlash('success', 'Votre demande a été envoyée et enregistrée avec succès !');
+            } catch (\Exception $e) {
+                $logger->error('Erreur lors de l\'envoi de l\'email : '.$e->getMessage());
+                $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi de votre demande.');
+            }
+
+            return $this->redirectToRoute('formulaire_prestation');
         }
-    
-        // Afficher le formulaire et les messages flash si nécessaire
+
         return $this->render('demande_prestation/index.html.twig', [
             'form' => $form->createView(),
         ]);

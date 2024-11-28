@@ -21,7 +21,7 @@
 }
 
 .shadow-lg {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Légèrement plus doux que le 0 0 15px */
 }
 
 .transition-all {
@@ -29,7 +29,7 @@
 }
 
 .hover\:shadow-xl:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Amélioration de l'ombre au survol */
 }
 
 /* Header de la sidebar */
@@ -77,15 +77,15 @@
 /* Items de catégorie */
 .category-item {
     border-radius: 0.5rem;
-    transition: all 0.3s ease;
-    cursor: pointer;
     padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .category-item.bg-blue-50 {
     background-color: #EFF6FF;
     color: #2563EB;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Ombre douce pour améliorer l'esthétique */
     transform: scale(1.02);
 }
 
@@ -128,7 +128,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 0.75rem;
     background: none;
     border: none;
     border-radius: 0.5rem;
@@ -268,10 +268,11 @@ li.flex {
 /* Select et inputs */
 select, input {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid #E5E7EB;
     border-radius: 0.5rem;
     outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 select:focus, input:focus {
@@ -312,7 +313,7 @@ select:focus, input:focus {
     width: 20rem;
     background-color: white;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ombre plus douce */
     transform: translateY(calc(100% - 3rem));
     transition: transform 0.3s ease;
 }
@@ -328,13 +329,13 @@ select:focus, input:focus {
 
 .chat-widget .message-input {
     flex: 1;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid #E5E7EB;
     border-radius: 0.5rem;
 }
 
 .send-message {
-    padding: 0.5rem;
+    padding: 0.75rem;
     background-color: #2563EB;
     color: white;
     border-radius: 0.5rem;
@@ -374,4 +375,89 @@ select:focus, input:focus {
 
 .relative {
     position: relative;
+}
+/* Animations de base */
+.category-item {
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .category-item:hover {
+    transform: scale(1.02);
+    background-color: #f0f0f0;
+  }
+  
+  .chevron-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .category-item.active .chevron-icon {
+    transform: rotate(90deg);
+  }
+  
+  .card {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Animation des sections déroulantes */
+  .section {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.3s ease-out;
+  }
+  
+  .section.open {
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  /* Animation d'agrandissement */
+.scale-up {
+    animation: scale-up 0.3s ease-in-out forwards;
+}
+
+@keyframes scale-up {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+/* Animation de fondu */
+.fade-in {
+    animation: fade-in 0.5s ease-in forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    animation: fade-out 0.5s ease-out forwards;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Animation de glissement */
+.translate-y-0 {
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(0);
 }
