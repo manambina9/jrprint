@@ -7,12 +7,11 @@
 <link href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
 <link href="{{ asset('vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+{# <script src="{{ asset('js/app.js') }}"></script> #}
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('vendor/aos/aos.js') }}"></script>
 <script src="{{ asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
-
 <div class="flex min-h-screen bg-gradient-to-br from-blue-50 to-gray-100">
-
     {# Sidebar gauche #}
     <div class="w-64 bg-white shadow-lg transition-all duration-300 hover:shadow-xl">
         <div class="p-4 bg-blue-600 text-white">
@@ -28,7 +27,9 @@
                         <a href="#" class="flex items-center justify-between p-3">
                             <div>
                                 <span class="font-medium">{{ category.name }}</span>
-                                <span class="text-xs block opacity-60">{{ category.count }} articles</span>
+                                <span class="text-xs block opacity-60">
+                                    {{ category.count }} articles
+                                </span>
                             </div>
                             <i class="fas fa-chevron-right transition-transform duration-300"></i>
                         </a>
@@ -126,6 +127,14 @@
                 </select>
             </div>
 
+            {# Prix #}
+            <div class="bg-green-50 p-4 rounded-lg transform transition-all duration-300 hover:scale-102">
+                <h3 class="font-bold text-green-800 mb-2">Prix:</h3>
+                <div class="text-2xl font-bold text-green-600">
+                    {{ prestation.price }} €
+                    <span class="text-sm text-green-500 ml-2">TTC</span>
+                </div>
+            </div>
         </div>
     </div>
 
