@@ -1,53 +1,65 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Register{% endblock %}
 
 {% block body %}
 <head>
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/Register.css') }}" rel="stylesheet">
  </head>
-<div class="error alert-danger">
-    {{ form_errors(registrationForm) }}
+<div class="register-container">
+    <h2 class="text-center">FORMULAIRE D'INSCRIPTION</h2>
+
+    {{ form_start(registrationForm, {'method': 'POST', 'attr': {'class': 'registration-form', 'id': 'registrationForm'}}) }}
+
+        <div class="form-group">
+            <label for="case" class="form-label">Saisissez votre cas :</label>
+            <select id="case" name="case" class="form-control">
+                <option value="personnel">Personnel</option>
+                <option value="entreprise">Entreprise</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <div class="form-column">
+                {{ form_row(registrationForm.email, {'attr': {'placeholder': 'Email'}}) }}
+                {{ form_row(registrationForm.entreprise, {'label': 'Entreprise', 'attr': {'placeholder': 'Entreprise'}}) }}
+                {{ form_row(registrationForm.adresse, {'label': 'Adresse', 'attr': {'placeholder': 'Adresse'}}) }}
+                {{ form_row(registrationForm.plainPassword.first, {'label': 'Mot de Passe', 'attr': {'placeholder': 'Mot de Passe'}}) }}
+                {{ form_row(registrationForm.plainPassword.second, {'label': 'Confirmation', 'attr': {'placeholder': 'Confirmation'}}) }}
+            </div>
+
+            <div class="form-column" id="enterpriseFields" style="display: none;">
+                {{ form_row(registrationForm.nif, {'label': 'NIF', 'attr': {'placeholder': 'NIF'}}) }}
+                {{ form_row(registrationForm.stat, {'label': 'STAT', 'attr': {'placeholder': 'STAT'}}) }}
+                {{ form_row(registrationForm.cif, {'label': 'CIF', 'attr': {'placeholder': 'CIF'}}) }}
+                {{ form_row(registrationForm.rcs, {'label': 'RCS', 'attr': {'placeholder': 'RCS'}}) }}
+                {{ form_row(registrationForm.rc, {'label': 'RC', 'attr': {'placeholder': 'RC'}}) }}
+            </div>
+        </div>
+
+        <div class="form-check-container">
+            <div class="form-check">
+                {{ form_row(registrationForm.agreeTerms, {'label': "J'accepte les conditions générales", 'attr': {'class': 'form-check-input'}}) }}
+            </div>
+        </div>
+
+        <div class="form-footer">
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+            <a href="{{ path('app_login') }}" class="btn btn-secondary">Se connecter</a>
+        </div>
+
+    {{ form_end(registrationForm) }}
 </div>
 
-    <div class="connect">
-    <div class="containerlogin" id="containerlogin">
-        <div class="form-containerlogin sign-up">
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const caseSelect = document.getElementById('case');
+        const enterpriseFields = document.getElementById('enterpriseFields');
 
-                {{ form_start(registrationForm) }}
-                    <strong><h3 class="s mt-5" > S'inscrire</h3></strong>
-                    <div class="social-icons">
-                        <img src="/images/logo.PNG" alt="logo jr_print" width="100px" height="50px">
-                    </div>
-                    <div class="form-control">
-
-                    {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.entreprise) }}
-                    {{ form_row(registrationForm.plainPassword.first, {
-                        label: 'Password'
-                    }) }}
-                    {{ form_row(registrationForm.plainPassword.second, {
-                        label: 'Confirm Password'
-                    }) }}
-                    {{ form_help(registrationForm) }}
-                    </div>
-                    {{ form_row(registrationForm.agreeTerms) }}
-                    
-                    <button type="submit" class="btn btn-info mb-5">S'inscrire</button>
-                {{ form_end(registrationForm) }}
-            </div>
-
-            <div class="toggle-containerlogin">
-        <div class="toggle">
-            <div class="toggle-panel toggle-right">
-                <h3>Bienvenue sur la page d'inscription</h3>
-                <p> L'inscription est rapide et vous permettra d'accéder à l'ensemble de nos services et fonctionnalités.</p>
-                <button class="hidden" id="register">
-                    <a href="{{path('app_login')}}">Se connecter</a>
-                </button>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
+        caseSelect.addEventListener('change', function () {
+            if (caseSelect.value === 'entreprise') {
+                enterpriseFields.style.display = 'block';
+            } else {
+                enterpriseFields.style.display = 'none';
+            }
+        });
+    });
+</script>
 {% endblock %}

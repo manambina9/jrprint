@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -18,14 +19,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column()]
     #[Assert\NotBlank]
     private ?string $entreprise = null;
 
     #[ORM\Column(length: 180)]
     #[Assert\NotBlank]
     #[Assert\Email]
-    #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
     /**
@@ -51,7 +51,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $nif = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    #[Assert\NotBlank(message: 'Le STAT est requis.')]
     private ?string $stat = null;
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -63,20 +62,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $rc = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $telephone = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $adresse = null;
-
-    #[ORM\Column(length: 10, nullable: true)]
-    private ?string $codePostal = null;
-
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $ville = null;
+        /**
+     * @Assert\IsTrue(message="Vous devez accepter les conditions générales.")
+     */
+    private ?bool $agreeTerms = null;
 
     public function __construct()
     {
@@ -89,15 +78,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function getEntreprise(): ?string
-    public function getEntreprise(): ?string
     {
         return $this->entreprise;
     }
 
     public function setEntreprise(?string $entreprise): static
-    public function setEntreprise(string $entreprise): self
     {
         $this->entreprise = $entreprise;
+
         return $this;
     }
 
@@ -109,6 +97,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -121,12 +110,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         $roles[] = 'ROLE_USER';
+
         return array_unique($roles);
     }
 
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
+
         return $this;
     }
 
@@ -138,6 +129,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
         return $this;
     }
 
@@ -153,61 +145,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-        return $this;
-    }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(?string $nom): self
-    {
-        $this->nom = $nom;
-        return $this;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(?string $telephone): self
-    {
-        $this->telephone = $telephone;
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(?string $adresse): self
-    {
-        $this->adresse = $adresse;
-        return $this;
-    }
-
-    public function getCodePostal(): ?string
-    {
-        return $this->codePostal;
-    }
-
-    public function setCodePostal(?string $codePostal): self
-    {
-        $this->codePostal = $codePostal;
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(?string $ville): self
-    {
-        $this->ville = $ville;
         return $this;
     }
 
@@ -283,9 +221,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getAgreeTerms(): ?bool
+    {
+        return $this->agreeTerms;
+    }
+
+    public function setAgreeTerms(?bool $agreeTerms): self
+    {
+        $this->agreeTerms = $agreeTerms;
+
+        return $this;
+    }
+    
     public function __toString(): string
     {
-        return $this->email ?: 'No email';
         return $this->email ?: 'No email';
     }
 }
