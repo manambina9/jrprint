@@ -1,8 +1,9 @@
+{% extends "base.html.twig" %}
 
 {% block body %}
 <head>
     <link href="{{ asset('css/Register.css') }}" rel="stylesheet">
- </head>
+</head>
 <div class="register-container">
     <h2 class="text-center">FORMULAIRE D'INSCRIPTION</h2>
 
@@ -18,19 +19,19 @@
 
         <div class="form-row">
             <div class="form-column">
-                {{ form_row(registrationForm.email, {'attr': {'placeholder': 'Email'}}) }}
-                {{ form_row(registrationForm.entreprise, {'label': 'Entreprise', 'attr': {'placeholder': 'Entreprise'}}) }}
-                {{ form_row(registrationForm.adresse, {'label': 'Adresse', 'attr': {'placeholder': 'Adresse'}}) }}
-                {{ form_row(registrationForm.plainPassword.first, {'label': 'Mot de Passe', 'attr': {'placeholder': 'Mot de Passe'}}) }}
-                {{ form_row(registrationForm.plainPassword.second, {'label': 'Confirmation', 'attr': {'placeholder': 'Confirmation'}}) }}
+                {{ form_row(registrationForm.email, {'attr': {'class': 'form-control mb-4', 'placeholder': 'Email'}}) }}
+                {{ form_row(registrationForm.entreprise, {'label': 'Entreprise', 'attr': {'class': 'form-control mb-4', 'placeholder': 'Entreprise'}}) }}
+                {{ form_row(registrationForm.adresse, {'label': 'Adresse', 'attr': {'class': 'form-control mb-4', 'placeholder': 'Adresse'}}) }}
+                {{ form_row(registrationForm.plainPassword.first, {'label': 'Mot de Passe', 'attr': {'class': 'form-control mb-4', 'placeholder': 'Mot de Passe'}}) }}
+                {{ form_row(registrationForm.plainPassword.second, {'label': 'Confirmation', 'attr': {'class': 'form-control mb-4', 'placeholder': 'Confirmation'}}) }}
             </div>
 
             <div class="form-column" id="enterpriseFields" style="display: none;">
-                {{ form_row(registrationForm.nif, {'label': 'NIF', 'attr': {'placeholder': 'NIF'}}) }}
-                {{ form_row(registrationForm.stat, {'label': 'STAT', 'attr': {'placeholder': 'STAT'}}) }}
-                {{ form_row(registrationForm.cif, {'label': 'CIF', 'attr': {'placeholder': 'CIF'}}) }}
-                {{ form_row(registrationForm.rcs, {'label': 'RCS', 'attr': {'placeholder': 'RCS'}}) }}
-                {{ form_row(registrationForm.rc, {'label': 'RC', 'attr': {'placeholder': 'RC'}}) }}
+                {{ form_row(registrationForm.nif, {'label': 'NIF', 'attr': {'class': 'form-control mb-2', 'placeholder': 'NIF'}}) }}
+                {{ form_row(registrationForm.stat, {'label': 'STAT', 'attr': {'class': 'form-control mb-2', 'placeholder': 'STAT'}}) }}
+                {{ form_row(registrationForm.cif, {'label': 'CIF', 'attr': {'class': 'form-control mb-2', 'placeholder': 'CIF'}}) }}
+                {{ form_row(registrationForm.rcs, {'label': 'RCS', 'attr': {'class': 'form-control mb-2', 'placeholder': 'RCS'}}) }}
+                {{ form_row(registrationForm.rc, {'label': 'RC', 'attr': {'class': 'form-control mb-2', 'placeholder': 'RC'}}) }}
             </div>
         </div>
 

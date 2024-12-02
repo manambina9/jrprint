@@ -25,12 +25,9 @@ class TestController extends AbstractController
     {
         // Créer une nouvelle commande
         $commande = new Commande();
-
-        // Simuler un client (assurez-vous que l'utilisateur existe dans la base de données)
+ 
         $client = new User();
-        $client->setEmail('testclient@example.com'); // Mettez l'adresse e-mail de test ici
-        // ... Ajoutez d'autres propriétés si nécessaire
-        // Si vous avez un utilisateur existant, utilisez-le ici
+        $client->setEmail('testclient@example.com');  
 
         // Définir des valeurs pour la commande
         $commande->setClient($client);

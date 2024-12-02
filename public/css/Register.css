@@ -1,169 +1,339 @@
-/* Styles généraux */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f4f8;
+/* Global reset and font settings */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
-.register-containere {
-    width: 60%;
-    max-width: 800px;
-    padding: 30px;
+body {
+    background-color: #f4f6f9;
+}
+
+/* Conteneur principal */
+.register-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 40px;
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffffff, #f0f5f9);
 }
 
-.text-center {
+/* Animation de fond */
+.register-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.2));
+    animation: bg-move 10s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes bg-move {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.register-container:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+/* Titre */
+.register-container h2 {
     text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 10px;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    position: relative;
+    animation: slideIn 0.8s ease-out;
 }
 
-.registration-form {
-    display: flex;
-    flex-direction: column;
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.form-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    gap: 20px;
-}
-
-.form-column {
-    flex: 1;
-}
-
-.form-column input, 
-.form-column select {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 15px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
-    background: #f9f9f9;
-}
-
-.form-column input:focus,
-.form-column select:focus {
-    border-color: #17a2b8;
-    outline: none;
-    background: #fff;
+/* Champs de formulaire */
+.form-group, .form-row {
+    margin-bottom: 25px;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 8px;
     font-weight: 600;
-    color: #555;
+    color: #34495e;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
 }
 
+.form-label:hover {
+    color: #007bff;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #dcdfe3;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    background-color: #ffffff;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 12px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Ajouter icône dans le champ de formulaire */
+.form-control.icon {
+    padding-left: 35px;
+    background-image: url('https://cdn-icons-png.flaticon.com/512/25/25694.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+/* Colonnes */
+.form-row {
+    display: flex;
+    gap: 25px;
+}
+
+.form-column {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Champs conditionnels */
+#enterpriseFields {
+    border: 2px dashed #e0e0e0;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9fafe;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Checkbox */
 .form-check {
-    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.form-check label {
+    color: #555;
+    font-size: 1rem;
 }
 
 .form-check-input {
-    margin-right: 8px;
-    transform: scale(1.2);
+    accent-color: #007bff;
+    cursor: pointer;
 }
 
+/* Footer */
 .form-footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 15px;
     margin-top: 30px;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .btn {
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
+    padding: 15px 25px;
+    font-size: 1.1rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    text-decoration: none;
-    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.4s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    min-width: 200px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-primary {
-    background-color: #17a2b8;
-    color: white;
+    background-color: #007bff;
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
 }
 
 .btn-primary:hover {
-    background-color: #138c9e;
+    background-color: #0056b3;
     transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 123, 255, 0.5);
 }
 
 .btn-secondary {
     background-color: #6c757d;
-    color: white;
+    color: #fff;
+    box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: #565e64;
     transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(108, 117, 125, 0.5);
 }
 
-#enterpriseFields {
-    border-left: 2px dashed #ccc;
-    padding-left: 20px;
-    margin-left: 20px;
+/* Ajout d'icône au bouton */
+.btn .icon {
+    margin-right: 10px;
 }
 
-select#case {
-    font-size: 16px;
-    font-weight: bold;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 12px;
-    background-color: #f9f9f9;
+/* Effet de survol sur les boutons */
+.btn:hover {
+    filter: brightness(1.1);
 }
 
-select#case:focus {
-    border-color: #17a2b8;
+/* Animations supplémentaires sur les champs */
+.form-control {
+    transition: transform 0.3s ease;
 }
 
-h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #444;
+.form-control:focus {
+    transform: scale(1.02);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .register-containere {
-        width: 90%;
-    }
-
+/* Responsivité */
+@media (max-width: 1024px) {
     .form-row {
         flex-direction: column;
-        gap: 0;
     }
 
     .form-column {
         width: 100%;
     }
 
-    #enterpriseFields {
-        border-left: none;
-        padding-left: 0;
-        margin-left: 0;
+    .form-footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .register-container {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .form-control {
+        font-size: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .form-label {
+        font-size: 1.2rem;
+    }
+
+    .register-container h2 {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-container {
+        padding: 12px;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .form-control {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .form-check label {
+        font-size: 0.9rem;
+    }
+
+    .form-row {
+        gap: 10px;
+    }
+
+    .form-column {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 360px) {
+    .register-container {
+        padding: 8px;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .form-control {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .btn {
+        padding: 8px;
+        font-size: 0.9rem;
     }
 }
