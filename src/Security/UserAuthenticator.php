@@ -35,20 +35,32 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             new UserBadge($email),
             new PasswordCredentials($request->getPayload()->getString('password')),
             [
-                new CsrfTokenBadge('authenticate', $request->getPayload()->getString('_csrf_token')),            ]
+                new CsrfTokenBadge('authenticate', $request->getPayload()->getString('_csrf_token')),            
+            ]
         );
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
-    {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
-        }
+{
+    // Récupérer les rôles de l'utilisateur
+    $roles = $token->getUser()->getRoles();
 
-        // For example:
-        return new RedirectResponse($this->urlGenerator->generate('user'));
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+    // Vérifier si l'utilisateur a le rôle ROLE_ADMIN
+    if (in_array('ROLE_ADMIN', $roles)) {
+        // Rediriger vers la page d'administration
+        return new RedirectResponse($this->urlGenerator->generate('admin'));
     }
+
+    // Vérifier si l'utilisateur a le rôle ROLE_USER
+    if (in_array('ROLE_USER', $roles)) {
+        // Rediriger vers la page utilisateur
+        return new RedirectResponse($this->urlGenerator->generate('user'));
+    }
+
+    // Par défaut, rediriger vers la page d'accueil (ou une autre page)
+    return new RedirectResponse($this->urlGenerator->generate('home'));
+}
+
 
     protected function getLoginUrl(Request $request): string
     {
